@@ -1,0 +1,12 @@
+Company name,VC Files,VC copy paste,VC Spec Known Version,VC Spec Write-in Version,Model and Process,Contact email,Do you want Progress Reports from us?
+example.com,,"{
+  ""@context"": [
+    ""https://w3.org/2018/credentials/v1"",
+    ""https://example.com/examples/v1""
+  ],
+  ""id"": ""http://example.edu/credentials/58473"",
+  ""type"": [""VerifiableCredential"", ""AlumniCredential""],
+  ""credentialSubject"": {
+    ""id"": ""did:example:ebfeb1f712ebc6f1c276e12ec21"",
+    ""alumniOf"": ""Example University""
+  },see VC,example@example.com,
