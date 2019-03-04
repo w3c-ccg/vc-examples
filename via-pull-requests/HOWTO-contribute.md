@@ -7,9 +7,9 @@ To contribute to this directory, submit a pull request that adds two files:
 
 in the .csv, add a single line of fields as follows (using the same fields as the survey):
 ```
-  Company name,
-  VC Files,
-  VC copy paste,
+  Company and/or library name and version,
+  not applicable,
+  not applicable,
   VC Spec Known Version,
   VC Spec Write-in Version,
   Model and Process,
