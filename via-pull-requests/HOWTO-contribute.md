@@ -2,8 +2,8 @@
 
 To contribute to this directory, submit a pull request that adds two files:
 
-  - <name-of-vc>.json
-  - <name-of-vc>.csv
+  - \<name-of-vc\>.json
+  - \<name-of-vc\>.csv
 
 in the .csv, add a single line of fields as follows (using the same fields as the survey):
 ```
