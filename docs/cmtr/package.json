@@ -1,0 +1,21 @@
+{
+  "name": "cmtr-examples",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "crypto-ld": "^3.7.0",
+    "jest": "^24.9.0",
+    "jsonld": "^2.0.1",
+    "jsonld-signatures": "4.5.0",
+    "vc-js": "^0.2.0"
+  },
+  "dependencies": {
+    "jsonschema": "^1.2.5"
+  }
+}

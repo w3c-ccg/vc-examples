@@ -1,0 +1,36 @@
+{
+  "@context": [
+    "http://schema.org",
+    {
+      "@version": 1.1,
+      "hetc": "https://w3c-ccg.github.io/vc-json-schemas/example/cmtr/v0.0/cmtr-v0.0#",
+      "CertifiedMillTestReport": "hetc:CertifiedMillTestReport",
+      "certifiedMillTestReport": "hetc:certifiedMillTestReport",
+      "chemicalAnalysisCompositionResults": "hetc:chemicalAnalysisCompositionResults",
+      "Al": "hetc:Al",
+      "Bi": "hetc:Bi",
+      "B": "hetc:B",
+      "C": "hetc:C",
+      "Cr": "hetc:Cr",
+      "Co": "hetc:Co",
+      "Cu": "hetc:Cu",
+      "Pb": "hetc:Pb",
+      "Mn": "hetc:Mn",
+      "Mo": "hetc:Mo",
+      "Ni": "hetc:Ni",
+      "Nb": "hetc:Nb",
+      "P": "hetc:P",
+      "Se": "hetc:Se",
+      "Si": "hetc:Si",
+      "S": "hetc:S",
+      "Te": "hetc:Te",
+      "Ti": "hetc:Ti",
+      "W": "hetc:W",
+      "V": "hetc:V",
+      "Zr": "hetc:Zr",
+      "documentHashLink": "hetc:documentHashLink",
+      "digiLink": "hetc:digiLink",
+      "heatNumber": "hetc:heatNumber"
+    }
+  ]
+}
