@@ -11,23 +11,23 @@ npm run test
 
 ### Adding a Resolver
 
-Add a URL to [resolvers.json](./resolvers/resolvers.json).
+Add a URL to [resolvers.json](./__fixtures__/resolvers/resolvers.json).
 
 ### Adding an Issuer
 
-Add a URL to [issuers.json](./issuers/issuers.json).
+Add a URL to [issuers.json](./__fixtures__/issuers/issuers.json).
 
 ### Adding an Verifier
 
-Add a URL to [verifiers.json](./verifiers/verifiers.json).
+Add a URL to [verifiers.json](./__fixtures__/verifiers/verifiers.json).
 
 ### Adding an Credential
 
-Add a require statement to [credentials](./credentials/index.js).
+Add a require statement to [credentials](./__fixtures__/credentials/index.js).
 
 ### Adding an Verification
 
-Add a require statement to [verifiable-credentials](./verifiable-credentials/index.js).
+Add a require statement to [verifiable-credentials](./__fixtures__/verifiable-credentials/index.js).
 
 ## Disclaimer
 
