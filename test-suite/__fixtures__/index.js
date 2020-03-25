@@ -8,8 +8,24 @@ const getJson = async url =>
     method: 'get',
     }).then(data => data.json());
 
+const postJson = async (url, body) =>
+    fetch(url, {
+    headers: {
+        Accept: 'application/ld+json',
+        'Content-Type': 'application/json',
+    },
+    method: 'post',
+    body: JSON.stringify(body)
+    }).then(data => data.json());
+
 module.exports = {
+    getJson,
+    postJson,
     dids: require('./dids'),
+    issuers: require('./issuers'),
+    verifiers: require('./verifiers'),
     resolvers: require('./resolvers'),
-    getJson
+    credentials: require('./credentials'),
+    verifiableCredentials: require('./verifiable-credentials'),
+    helpers:require('./helpers')
 }
