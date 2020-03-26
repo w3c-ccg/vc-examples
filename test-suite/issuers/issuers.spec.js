@@ -4,6 +4,7 @@ const fixtures = require('../__fixtures__');
 describe('issuers', ()=>{
     fixtures.issuers.forEach((issuer)=>{
         describe(issuer, ()=>{
+            // assume the credential as the correct issuer
             fixtures.credentials.forEach((credential)=>{
                 it('should issue ' + credential.type[1], async ()=>{
                     const vc = await fixtures.postJson(issuer, credential);

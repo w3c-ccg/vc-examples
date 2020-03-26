@@ -27,5 +27,6 @@ module.exports = {
     resolvers: require('./resolvers'),
     credentials: require('./credentials'),
     verifiableCredentials: require('./verifiable-credentials'),
+    issuerAssertionMethods: require('./issuerAssertionMethods'),
     helpers:require('./helpers')
 }
