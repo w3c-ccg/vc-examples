@@ -10,6 +10,7 @@ const getJson = async url =>{
 
     const resBody = await res.json()
     if (res.status > 300){
+        console.error('ERROR with GET: ', url);
         console.error(resBody);
     }
     return resBody
@@ -26,6 +27,8 @@ const postJson = async (url, body) => {
     });
     const resBody = await res.json()
     if (res.status > 300){
+        console.error('ERROR with POST: ', url);
+        console.error('BODY: ', JSON.stringify(body, null, 2));
         console.error(resBody);
     }
     return resBody;
