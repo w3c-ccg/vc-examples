@@ -1,8 +1,8 @@
 
 const fixtures = require('../__fixtures__');
 
-describe('verifiers', ()=>{
-    fixtures.verifiers.forEach((verifier)=>{
+describe('vp-verifiers', ()=>{
+    fixtures.vpVerifiers.forEach((verifier)=>{
         describe(verifier, ()=>{
             fixtures.verifiableCredentials.forEach((credential)=>{
                 it('should verify ' + credential.type[1], async ()=>{
