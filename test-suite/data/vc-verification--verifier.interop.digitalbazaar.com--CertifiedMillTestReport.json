@@ -1,0 +1,25 @@
+{
+  "verified": false,
+  "error": {
+    "name": "VerificationError",
+    "errors": [
+      {
+        "name": "jsonld.InvalidUrl",
+        "details": {
+          "code": "loading remote context failed",
+          "url": "https://w3c-ccg.github.io/vc-examples/cmtr/examples/v0.1/cmtr-v0.1.jsonld",
+          "cause": {
+            "name": "Error",
+            "message": "Document not found: https://w3c-ccg.github.io/vc-examples/cmtr/examples/v0.1/cmtr-v0.1.jsonld",
+            "stack": "Error: Document not found: https://w3c-ccg.github.io/vc-examples/cmtr/examples/v0.1/cmtr-v0.1.jsonld\n    at api.documentLoader (/home/node/app/node_modules/bedrock-vc-verifier/lib/documentLoader.js:50:9)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)"
+          }
+        },
+        "message": "Dereferencing a URL did not result in a valid JSON-LD object. Possible causes are an inaccessible URL perhaps due to a same-origin policy (ensure the server uses CORS if you are using client-side JavaScript), too many redirects, a non-JSON response, or more than one HTTP Link Header was provided for a remote context.",
+        "stack": "jsonld.InvalidUrl: Dereferencing a URL did not result in a valid JSON-LD object. Possible causes are an inaccessible URL perhaps due to a same-origin policy (ensure the server uses CORS if you are using client-side JavaScript), too many redirects, a non-JSON response, or more than one HTTP Link Header was provided for a remote context.\n    at ContextResolver._fetchContext (/home/node/app/node_modules/jsonld/lib/ContextResolver.js:159:13)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)"
+      }
+    ]
+  },
+  "checks": [
+    "proof"
+  ]
+}
