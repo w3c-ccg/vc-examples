@@ -1,5 +1,6 @@
 [
     "https://vc.transmute.world/credentials/issueCredential",
     "https://uniissuer.io/danubetech/credential-issuer/0.0.1/credentials/issueCredential",
-    "https://issuer.interop.digitalbazaar.com/credentials/issueCredential"
+    "https://issuer.interop.digitalbazaar.com/credentials/issueCredential",
+    "http://api.neo-flow.com/credentials/issueCredential"
 ]
