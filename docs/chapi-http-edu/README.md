@@ -52,7 +52,7 @@ Example Response:
 
 ## 2. Issuance
 
-Next the DIDAuth Response and a request for a University degree need to made to the university website.
+Next a request for a University degree needs to be made to the university website.
 
 Normally, a website would first verify the DID Auth, and then contruct the request for a credential to be issued against the HTTP Issuer API.
 
