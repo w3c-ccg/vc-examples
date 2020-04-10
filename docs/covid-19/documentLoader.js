@@ -17,7 +17,7 @@ const contexts = {
   ),
   "https://w3id.org/did/v0.11": loadContext("../contexts/did-v0.11.jsonld"),
 
-  "https://w3c-ccg.github.io/vc-examples/covid-19/v1.jsonld": loadContext(
+  "https://w3c-ccg.github.io/vc-examples/covid-19/v1/v1.jsonld": loadContext(
     "./v1/v1.jsonld"
   ),
 };
