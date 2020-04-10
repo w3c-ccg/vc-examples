@@ -23,7 +23,7 @@ Lets consider the 4 cases for the "immunoglobulin detection-based tests for COVI
 
 We only need 2 booleans to represent these cases, one for IgM and one for IgG.
 
-```json
+```
     ...
     "IgM": false,
     "IgG": true,
@@ -47,7 +47,7 @@ This is what a verifier would see:
     {
       "@context": [
         "https://www.w3.org/2018/credentials/v1",
-        "https://w3c-ccg.github.io/vc-examples/covid-19/v1.jsonld"
+        "https://w3c-ccg.github.io/vc-examples/covid-19/v1/v1.jsonld"
       ],
       "id": "http://example.com/credential/123",
       "type": ["VerifiableCredential", "ImmunoglobulinDetectionTestCard"],
