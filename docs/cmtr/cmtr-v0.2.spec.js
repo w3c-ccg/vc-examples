@@ -8,8 +8,8 @@ var Validator = require("jsonschema").Validator;
 var v = new Validator();
 
 const documentLoader = require("./documentLoader");
-const credentialSchema = require("./examples/v0.0/cmtr-credential-schema-v0.0.json");
-const credential = require("./examples/v0.0/cmtr-credential-v0.0.json");
+const credentialSchema = require("./examples/v0.2/cmtr-credential-schema-v0.2.json");
+const credential = require("./examples/v0.2/cmtr-credential-v0.2.json");
 
 const didDocKeys = require("./didDocKeys");
 
@@ -28,8 +28,9 @@ const suite = new Ed25519Signature2018({
 
 let verifiableCredentialSchema;
 let verifiableCredential;
+let verifiablePresentation;
 
-describe("cmtr-v0.0", () => {
+describe("cmtr-v0.2", () => {
   describe("issue and verify verifiableCredentialSchema", () => {
     it("should fail when verifiableCredentialSchema is mutated", async () => {
       expect.assertions(1);
@@ -61,14 +62,15 @@ describe("cmtr-v0.0", () => {
           compactProof: false,
         }
       );
-      // console.log(JSON.stringify(verifiableCredentialSchema, null, 2));
       fs.writeFileSync(
         path.resolve(
           __dirname,
-          "./examples/v0.0/cmtr-verifiable-credential-schema-v0.0.json"
+          "./examples/v0.2/cmtr-verifiable-credential-schema-v0.2.json"
         ),
         JSON.stringify(verifiableCredentialSchema, null, 2)
       );
+
+      // console.log(JSON.stringify(verifiableCredentialSchema, null, 2));
       const result = await jsigs.verify(verifiableCredentialSchema, {
         documentLoader,
         suite,
@@ -86,7 +88,7 @@ describe("cmtr-v0.0", () => {
         documentLoader,
       });
       delete verifiableCredential.id;
-      const result = await vc.verifyCredential({
+      const result = await vc.verify({
         credential: { ...verifiableCredential },
         suite,
         documentLoader,
@@ -108,10 +110,47 @@ describe("cmtr-v0.0", () => {
       fs.writeFileSync(
         path.resolve(
           __dirname,
-          "./examples/v0.0/cmtr-verifiable-credential-v0.0.json"
+          "./examples/v0.2/cmtr-verifiable-credential-v0.2.json"
         ),
         JSON.stringify(verifiableCredential, null, 2)
       );
+
+      expect(result.verified).toBe(true);
+    });
+  });
+
+  describe("prove and verify Verifiable Presentation", () => {
+    it("should pass when verifiableCredential is not mutated ", async () => {
+      const id = "ebc6f1c2";
+      const holder = "did:key:z6MkqNJSEiVgztATfHBfE2bamdCxsmLm52tB2j8QfyE5Ssu1";
+      const challenge = "ebc6f1c2";
+      const presentation = vc.createPresentation({
+        verifiableCredential,
+        id,
+        holder,
+      });
+      expect(presentation.type).toEqual(["VerifiablePresentation"]);
+      verifiablePresentation = await vc.signPresentation({
+        presentation,
+        suite,
+        challenge,
+        documentLoader,
+      });
+
+      const result = await vc.verify({
+        presentation: verifiablePresentation,
+        suite,
+        challenge,
+        documentLoader,
+      });
+      fs.writeFileSync(
+        path.resolve(
+          __dirname,
+          "./examples/v0.2/cmtr-verifiable-presentation-v0.2.json"
+        ),
+        JSON.stringify(verifiablePresentation, null, 2)
+      );
+
       // console.log(JSON.stringify(verifiableCredential, null, 2));
       expect(result.verified).toBe(true);
     });
@@ -131,12 +170,12 @@ describe("cmtr-v0.0", () => {
       expect.assertions(1);
       try {
         let broken = { ...verifiableCredential.credentialSubject };
-        delete broken.certifiedMillTestReport;
+        delete broken.cmtr;
         v.validate(broken, verifiableCredentialSchema.schema, {
           throwError: true,
         });
       } catch (e) {
-        expect(e.message).toBe('requires property "certifiedMillTestReport"');
+        expect(e.message).toBe('requires property "cmtr"');
       }
     });
   });
