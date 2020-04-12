@@ -2,9 +2,13 @@
 
 #### These are hypothetical, DO NOT USE THIS IN PRODUCTION.
 
-If you are interested in collaborating, open an issue and ping me: @OR13.
+## Communities Working on COVID-19 Credentials
 
-## Open Source & Built On Standards
+- [http://covid19credentials.com](http://covid19credentials.com)
+- DIF is forming a WG
+- W3C CCG has hosted some good conversations on "W3C Credentials CG (Public List)" <public-credentials@w3.org>
+
+## Standards and Tools
 
 - [Credential Handler API 1.0](https://w3c-ccg.github.io/credential-handler-api/)
 - [Verifiable Credentials Data Model 1.0](https://www.w3.org/TR/vc-data-model/)
