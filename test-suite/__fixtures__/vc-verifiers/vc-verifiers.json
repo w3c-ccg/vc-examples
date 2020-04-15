@@ -1,6 +1,6 @@
 [
     "https://vc.transmute.world/verifier/credentials",
-    "https://univerifier.io/danubetech/credential-verifier/0.0.1/verifications",
+    "https://univerifier.io/api/verifier/credentials",
     "https://verifier.interop.digitalbazaar.com/verifier/credentials",
     "http://api.neo-flow.com/verifier/credentials",
     "https://verifier.sandbox.trustbloc.dev/verifier/credentials"
