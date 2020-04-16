@@ -3,7 +3,7 @@ const fetch = require('node-fetch')
 const getJson = async url =>{
     const res = await fetch(url, {
         headers: {
-            Accept: 'application/ld+json',
+            Accept: 'application/ld+json,application/json',
         },
         method: 'get',
     });
@@ -19,7 +19,7 @@ const getJson = async url =>{
 const postJson = async (url, body) => {
     const res = await fetch(url, {
         headers: {
-            Accept: 'application/ld+json',
+            Accept: 'application/ld+json,application/json',
             'Content-Type': 'application/json',
         },
         method: 'post',

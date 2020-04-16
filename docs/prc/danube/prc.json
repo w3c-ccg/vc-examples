@@ -24,13 +24,16 @@
       "birthCountry": "Bahamas",
       "birthDate": "1958-08-17"
     },
-    "issuer": "did:sov:danube:2PmNu2MaxZ97uyZyJJscqH",
-    "issuanceDate": "2020-03-27T22:49:29Z",
+    "issuer": "did:sov:danube:TVfus95c1sHBZxf2NsETqt",
+    "identifier": "83627465",
+    "name": "Permanent Resident Card",
+    "description": "Government of Example Permanent Resident Card.",
+    "issuanceDate": "2020-04-16T23:30:55Z",
     "proof": {
       "type": "Ed25519Signature2018",
-      "created": "2020-03-27T22:49:29Z",
+      "created": "2020-04-16T21:30:59Z",
       "proofPurpose": "assertionMethod",
-      "verificationMethod": "did:sov:danube:2PmNu2MaxZ97uyZyJJscqH#key-1",
-      "jws": "eyJjcml0IjpbImI2NCJdLCJiNjQiOmZhbHNlLCJhbGciOiJFZERTQSJ9..znQQzfWtedGS1o2g7vToe8iEJwwATB3736d6GGs95WTpv8Sy-Yw1nYlKBL3wSxmbdBcukKHfjCsIE5bn_EcdBg"
+      "verificationMethod": "did:sov:danube:TVfus95c1sHBZxf2NsETqt#key-1",
+      "jws": "eyJjcml0IjpbImI2NCJdLCJiNjQiOmZhbHNlLCJhbGciOiJFZERTQSJ9..UFYWSo4YvZykv4xMRV2GqeTvmjmIfpI5SrPBoya3hkeSNfUjqwpGaotDxIxBSDtkxMrn_NpowBOJ8koWxZPMDg"
     }
-  }
+}
