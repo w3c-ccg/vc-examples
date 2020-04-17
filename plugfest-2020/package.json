@@ -1,0 +1,22 @@
+{
+  "name": "plugfest-2020",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test:all": "jest",
+    "test:digital_bazaar": "INTEROP_FOCUS=digital_bazaar npm run test",
+    "test:transmute": "INTEROP_FOCUS=transmute npm run test",
+    "test:trustbloc": "INTEROP_FOCUS=trustbloc npm run test",
+    "test:mavennet": "INTEROP_FOCUS=mavennet npm run test",
+    "test:danubetech": "INTEROP_FOCUS=danubetech npm run test"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^25.1.0",
+    "jest-html-reporter": "^2.8.2",
+    "node-fetch": "^2.6.0"
+  }
+}
