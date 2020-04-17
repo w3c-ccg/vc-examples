@@ -1,4 +1,4 @@
 node_modules
 .vscode
 
-./test-suite/data
+# test-suite/data
