@@ -2,6 +2,8 @@
 
 This Test Suite uses the examples from this repo and some configuration settings, to prove interoperability between HTTP APIs for Resolution, Issuance and Verification, and Custom Credential Formats.
 
+# Plugfest 2020 Test Suite has moved [here](https://github.com/w3c-ccg/vc-examples/tree/master/plugfest-2020)
+
 ## Getting Started
 
 ```
