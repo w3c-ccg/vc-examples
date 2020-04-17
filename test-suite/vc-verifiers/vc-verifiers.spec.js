@@ -9,10 +9,6 @@ describe('vc-verifiers', ()=>{
                     let options = { 
                         checks: ['proof'],
                     }
-                    // Danube tech expects an empty options object...
-                    // if (verifier.indexOf('danube') !== -1){
-                    //     options = {};
-                    // } 
                     const verificaton = await fixtures.postJson(verifier, {
                         verifiableCredential: credential,
                         options,
