@@ -4,9 +4,9 @@ const verifiable_presentations = require("./verifiable_presentations");
 module.exports = {
   name: "Secure Key",
   verify_credential_endpoint:
-    "https://issuer.sandbox.trustbloc.dev/vc-issuer-interop/verifier/credentials",
+    "https://verifier.sandbox.trustbloc.dev/verifier/credentials",
   verify_presentation_endpoint:
-    "https://issuer.sandbox.trustbloc.dev/vc-issuer-interop/verifier/presentations",
+    "https://verifier.sandbox.trustbloc.dev/verifier/presentations",
   credentials: [...credentials],
   verifiable_credentials: [...verifiable_credentials],
   verifiable_presentations: [...verifiable_presentations],
