@@ -4,8 +4,8 @@
 
 Versions may be significantly different from each other or contain non-interoperable breaking changes. All versions should be considerd unstable (Not for Production Use), so for example, "v1" may be updated continiously with breaking changes.
 
-- [v1 IgM & IgG with PII](./v1)
-- [v2 Rapid Test & Travel Badge](./v2)
+- [v1 IgM & IgG with PII](./v1/v1)
+- [v2 Rapid Test & Travel Badge](./v2/v2)
 
 ## Standards and Tools
 
