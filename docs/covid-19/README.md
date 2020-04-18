@@ -1,4 +1,4 @@
-## Thanks to the [DIF](https://identity.foundation/), [W3C-CCG](https://w3c-ccg.github.io/) & [CCI](https://www.covidcreds.com/) for providing feedback these Hypothetical Credential Formats.
+## Thanks to the [DIF](https://identity.foundation/), [W3C-CCG](https://w3c-ccg.github.io/) & [CCI](https://www.covidcreds.com/) for working together on this initiative.
 
 ## Versioning
 
