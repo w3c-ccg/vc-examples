@@ -10,10 +10,10 @@
 
 ## Versioning
 
-Versions may be signicantly different from eachother or contain non-interoperable breaking changes. All versions should be considerd unstable, so for example, "v1" may be updated continiously with breaking changes.
+Versions may be significantly different from each other or contain non-interoperable breaking changes. All versions should be considerd unstable (Not for Production Use), so for example, "v1" may be updated continiously with breaking changes.
 
 - [v1](./v1) IgM & IgG with PII
-- [v2](./v2)
+- [v2](./v2) Rapid Test & Travel Badge
 
 ## Standards and Tools
 
