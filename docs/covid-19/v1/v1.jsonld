@@ -17,7 +17,7 @@
       "@type": "@id"
     },
     "ImmunoglobulinDetectionTestCard": {
-      "@id": "https://w3c-ccg.github.io/vc-examples/covid-19/v1#ImmunoglobulinDetectionTestCard",
+      "@id": "https://w3c-ccg.github.io/vc-examples/covid-19/v1/v1#ImmunoglobulinDetectionTestCard",
       "@context": {
         "@version": 1.1,
         "@protected": true,
@@ -32,13 +32,13 @@
       }
     },
     "ImmunoglobulinDetectionTestSubject": {
-      "@id": "https://w3c-ccg.github.io/vc-examples/covid-19/v1#ImmunoglobulinDetectionTestSubject",
+      "@id": "https://w3c-ccg.github.io/vc-examples/covid-19/v1/v1#ImmunoglobulinDetectionTestSubject",
       "@context": {
         "@version": 1.1,
         "@protected": true,
         "id": "@id",
         "type": "@type",
-        "covid-19": "https://w3c-ccg.github.io/vc-examples/covid-19/v1#",
+        "covid-19": "https://w3c-ccg.github.io/vc-examples/covid-19/v1/v1#",
         "schema": "http://schema.org/",
         "xsd": "http://www.w3.org/2001/XMLSchema#",
         "birthDate": {

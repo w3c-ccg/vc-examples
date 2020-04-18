@@ -1,0 +1,53 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "@protected": true,
+    "name": "http://schema.org/name",
+    "description": "http://schema.org/description",
+    "image": {
+      "@id": "http://schema.org/image",
+      "@type": "@id"
+    },
+    "location": {
+      "@id": "http://schema.org/location",
+      "@type": "@id"
+    },
+    "url": {
+      "@id": "http://schema.org/url",
+      "@type": "@id"
+    },
+    "qSARS-CoV-2-Rapid-Test-Credential": {
+      "@id": "https://w3c-ccg.github.io/vc-examples/covid-19/v2/v2#qSARS-CoV-2-Rapid-Test-Credential",
+      "@context": {
+        "@version": 1.1,
+        "@protected": true,
+        "id": "@id",
+        "type": "@type",
+        "covid-19": "https://w3c-ccg.github.io/vc-examples/covid-19/v2/v2#",
+        "catalogNumber": {
+          "@id": "covid-19:catalogNumber"
+        },
+        "ifu": {
+          "@id": "covid-19:ifu"
+        },
+        "assay": {
+          "@id": "covid-19:assay"
+        }
+      }
+    },
+    "qSARS-CoV-2-Travel-Badge-Credential": {
+      "@id": "https://w3c-ccg.github.io/vc-examples/covid-19/v2/v2#qSARS-CoV-2-Travel-Badge-Credential",
+      "@context": {
+        "@version": 1.1,
+        "@protected": true,
+        "id": "@id",
+        "type": "@type",
+        "image": {
+          "@id": "http://schema.org/image",
+          "@type": "@id"
+        }
+      }
+    },
+    "Person": "http://schema.org/Person"
+  }
+}
