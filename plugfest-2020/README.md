@@ -46,40 +46,48 @@ See [this example](./vendors/transmute/index.js).
 
 ## Test Cases
 
-### Required Functionality:
+### Issuer
 
-#### _Issuer_
+#### Issue Credential HTTP API
 
-1. Issuer must return 201 HTTP-Response when a credential is successfully issued.
-2. Issuer must support the vc-credential data model with no options field.
-3. Issuer must support issuance of credentials with at least 2 different DID methods as an issuer
-4. Issuer must return a 400 HTTP-Response when the request is rejected.
-5. Issuer must reject if the issuer is not a did or issuer.id is not a did.
-6. Issuer must reject if the proofPurpose is not supported in controller
-7. Issuer must reject if the verificationMethod does not exist
-8. Issuer must reject if the credential does not contain a context
-9. Issuer must reject a malformed JSON-LD context.
+1. The Issuer's Issue Credential HTTP API MUST return a 201 HTTP response status code after successful credential issuance.
+2. The Issuer's Issue Credential HTTP API MUST require `"credential"` in the body of the POST request. The field `"credential"` MUST be conformant to [Verifiable Claims Data Model and Representations 1.0](https://www.w3.org/2017/05/vc-data-model/CGFR/2017-05-01/).
+3. The Issuer's Issue Credential HTTP API MUST support the issuance of credentials with at least 2 different DID methods as the `"issuer"` on a Verifiable Credential.
+4. The Issuer's Issue Credential HTTP API MUST return a 400 HTTP response status code when the request is rejected.
+5. The Issuer's Issue Credential HTTP API MUST reject if the value of `"credential.issuer"` or `"credential.issuer.id"` in the body of the POST request is not a DID.
+6. The Issuer's Issue Credential HTTP API MUST reject if the value of `"options.proofPurpose"` in the body of the POST request is not supported.
+7. The Issuer's Issue Credential HTTP API MUST reject if the value of `"options.assertionMethod"` in the body of the POST request does not exist.
+8. The Issuer's Issue Credential HTTP API MUST reject if the value of `"credential"` in the body of the POST request does not contain a context.
+9. The Issuer's Issue Credential HTTP API MUST reject if the value of `"credential"` in the body of the POST request contains a malformed JSON-LD context.
 
-#### _Verifier_
+#### Verifier
 
-1. Verifier must check for a Credential Signature Failure due to mutation of the jws property
-2. Verifier must check for a Credential Signature Failure due to lack of create field
-3. Verifier must check for a Credential Signature Failure due to invalid proofPurpose
-4. Verifier must reject an added property to the credential
-5. Verifier must reject a removed property to the credential
-6. Verifier must reject a mutated property to the credential
-7. Verifier must reject an added property to the proof object
-8. Verifier must reject a removed property to the proof object
-9. Verifier must reject a mutated property to the proof object
-10. Verifier must be able to verify credentials with atleast 2 different DID methods as the did issuer
-11. Verifier must be able to verify presentations when the issuer, holder and subject are different
-12. Verifier must be able to verify presentations when the issuer, holder and subject are the same
-13. Verifier response must adhere to proof verification format for credential and presentation
-14. Verifier error response must provide an error object
-15. Verifier must support the the Ed25519 Cryptographic Suite.
-16. Verifier must return a 400 HTTP-Response if the issuer is not a did or issuer.id is not a did.
-17. Verifier may verify a presentation with multiple credentials.
-18. Verifier may support domain and challenge
+#### Verify Credential HTTP API
+
+1. The Verifier's Verify Credential HTTP API MUST fail to verify a Verifiable Credential with a mutated signature value (ex. a mutated jws) in the proof.
+2. The Verifier's Verify Credential HTTP API MUST fail to verify a Verifiable Credential with the `"created"` property removed from the proof.
+3. The Verifier's Verify Credential HTTP API MUST fail to verify a Verifiable Credential with a mutated `"proofPurpose"` in the proof.
+4. The Verifier's Verify Credential HTTP API MUST fail to verify a Verifiable Credential with an added property to the credential.
+5. The Verifier's Verify Credential HTTP API MUST fail to verify a Verifiable Credential with a removed property from the credential.
+6. The Verifier's Verify Credential HTTP API MUST fail to verify a Verifiable Credential with a mutated property to the credential.
+7. The Verifier's Verify Credential HTTP API MUST fail to verify a Verifiable Credential with an added property to the proof.
+8. The Verifier's Verify Credential HTTP API MUST fail to verify a Verifiable Credential a removed property to the proof.
+9. The Verifier's Verify Credential HTTP API MUST fail to verify a Verifiable Credential with a mutated property to the proof.
+10. The Verifier's Verify Credential HTTP API MUST verify a Verifiable Credential with at least 2 different DID methods set as the issuer property for a credential.
+11. The Verifier's Verify Credential HTTP API MUST adhere to the proof verification format.
+12. The Verifier's Verify Credential HTTP API MUST provide an error object upon rejection.
+13. The Verifier's Verify Credential HTTP API MUST support the the Ed25519 Cryptographic Suite.
+
+#### Verify Presentation HTTP API
+
+1. The Verifier's Verify Presentation HTTP API MUST verify a Verifiable Presentation where the credential's issuer, presentation's holder and credential's subject are different.
+2. The Verifier's Verify Presentation HTTP API MUST verify a Verifiable Presentation where the credential's issuer, presentation's holder and credential's subject are the same.
+3. The Verifier's Verify Presentation HTTP API MUST adhere to the proof verification format.
+4. The Verifier's Verify Presentation HTTP API MUST provide an error object upon rejection.
+5. The Verifier's Verify Presentation HTTP API MUST support the the Ed25519 Cryptographic Suite.
+~~6. STRIKE: Verifier must return a 400 HTTP-Response if the issuer is not a did or issuer.id is not a did.~~ Remove?
+6. The Verifier's Verify Presentation HTTP API MAY verify a presentation with multiple credentials.
+7. The Verifier's Verify Presentation HTTP API MUST support `"options.challenge"` in the body of the POST request.
 
 ## Disclaimer
 
