@@ -1,1 +1,0 @@
-module.exports = require('./vc-verifiers.json')

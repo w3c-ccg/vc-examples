@@ -1,7 +1,0 @@
-[
-  "https://vc.transmute.world/credentials/issueCredential",
-  "https://uniissuer.io/api/credentials/issueCredential",
-  "https://issuer.interop.digitalbazaar.com/credentials/issueCredential",
-  "http://api.neo-flow.com/credentials/issueCredential",
-  "https://issuer.sandbox.trustbloc.dev/vc-issuer-interop/credentials/issueCredential"
-]
