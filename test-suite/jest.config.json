@@ -1,9 +1,0 @@
-{
-    "reporters": [
-        "default",
-        ["./node_modules/jest-html-reporter", {
-            "pageTitle": "Interop Report",
-            "outputPath": "../docs/test-report.html"
-        }]
-    ]
-}
