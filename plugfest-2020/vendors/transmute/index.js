@@ -3,16 +3,17 @@ const verifiable_credentials = require("./verifiable_credentials");
 const verifiable_presentations = require("./verifiable_presentations");
 module.exports = {
   name: "Transmute",
-  verify_credential_endpoint: "https://vc.transmute.world/verifier/credentials",
+  verify_credential_endpoint:
+    "https://vc.transmute.world/v0.1.0/verify/credentials",
   verify_presentation_endpoint:
-    "https://vc.transmute.world/verifier/presentations",
+    "https://vc.transmute.world/v0.1.0/verify/presentations",
   credentials: [...credentials],
   verifiable_credentials: [...verifiable_credentials],
   verifiable_presentations: [...verifiable_presentations],
   issuers: [
     {
       name: "DID Web Issuer",
-      endpoint: "https://vc.transmute.world/credentials/issueCredential",
+      endpoint: "https://vc.transmute.world/v0.0.0/credentials/issueCredential",
       options: [
         {
           issuer: "did:web:vc.transmute.world",
@@ -23,7 +24,7 @@ module.exports = {
     },
     {
       name: "DID Issuers",
-      endpoint: "https://vc.transmute.world/credentials/issueCredential",
+      endpoint: "https://vc.transmute.world/v0.1.0/issue/credentials",
       options: [
         {
           issuer: "did:key:z6MkjRagNiMu91DduvCvgEsqLZDVzrJzFrwahc4tXLt9DoHd",
