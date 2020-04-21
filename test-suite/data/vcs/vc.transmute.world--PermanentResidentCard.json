@@ -24,7 +24,7 @@
     "birthCountry": "Bahamas",
     "birthDate": "1958-08-17"
   },
-  "issuer": "did:web:vc.transmute.world",
+  "issuer": "did:sov:danube:TVfus95c1sHBZxf2NsETqt",
   "identifier": "83627465",
   "name": "Permanent Resident Card",
   "description": "Government of Example Permanent Resident Card.",
@@ -34,6 +34,6 @@
     "created": "2019-12-11T03:50:55Z",
     "verificationMethod": "did:web:vc.transmute.world#z6MksHh7qHWvybLg5QTPPdG2DgEjjduBDArV9EF9mRiRzMBN",
     "proofPurpose": "assertionMethod",
-    "jws": "eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..zH4VDpcPu9T6FQV_VDecy9yQnGPkZYiE1YhO-nBECDFfm0X5yrsmfJMFkVU1bbRV2s3rGRHOFKcxyHyRkfZFBw"
+    "jws": "eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..ng0tiHpSUgUeDlUx70GaD5Iie1MWfwAMwRmtFLIqXMawhy-HEHDmZVV-7FROIrJl77jTYsbOsmEbahS0lrcGCA"
   }
 }

@@ -16,6 +16,8 @@ describe("vp-verifiers", () => {
               verifiablePresentation,
               options: {
                 checks: ["proof"],
+                domain: verifiablePresentation.proof.domain,
+                challenge: verifiablePresentation.proof.challenge,
               },
             });
             expect(verificaton.checks).toEqual(["proof"]);

@@ -31,8 +31,8 @@
   "issuanceDate": "2020-04-16T23:30:55Z",
   "proof": {
     "type": "Ed25519Signature2018",
-    "created": "2020-04-17T01:18:40Z",
-    "jws": "eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..6L6vrbMzP20SZ74zl3BHELsPaHIronUqMGV58ChvNuAYVB3e9cBD0HeJkbeR30r27idDfwbMA1J4BMVkUQe4Dw",
+    "created": "2020-04-21T18:01:15Z",
+    "jws": "eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..5T1frH2V0js83ILV6dcoi8_p9SyMsDixzs-MDe9c15msIkhoELYac8d8yHKKT9PntgfkrSb_nKoIkiRRXRleCw",
     "proofPurpose": "assertionMethod",
     "verificationMethod": "did:v1:test:nym:z6MkfG5HTrBXzsAP8AbayNpG3ZaoyM4PCqNPrdWQRSpHDV6J#z6MkqfvdBsFw4QdGrZrnx7L1EKfY5zh9tT4gumUGsMMEZHY3"
   }

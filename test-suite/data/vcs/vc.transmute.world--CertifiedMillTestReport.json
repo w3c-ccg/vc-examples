@@ -8,7 +8,9 @@
     "VerifiableCredential",
     "CertifiedMillTestReport"
   ],
-  "issuer": "did:web:vc.transmute.world",
+  "issuer": {
+    "id": "did:key:z6MkqNJSEiVgztATfHBfE2bamdCxsmLm52tB2j8QfyE5Ssu1"
+  },
   "issuanceDate": "2020-03-09T18:19:10.033Z",
   "name": "Certified Mill Test Report",
   "description": "A mill test report (MTR) and often also called a certified mill test report, certified material test report, mill test certificate (MTC), inspection certificate, certificate of test, or a host of other names, is a quality assurance document used in the metals industry that certifies a material's chemical and physical properties and states a product made of metal (steel, aluminum, brass or other alloys) complies with an international standards organization (such as ANSI, ASME, etc.) specific standards.",
@@ -216,7 +218,7 @@
       "created": "2019-12-11T03:50:55Z",
       "verificationMethod": "did:web:vc.transmute.world#z6MksHh7qHWvybLg5QTPPdG2DgEjjduBDArV9EF9mRiRzMBN",
       "proofPurpose": "assertionMethod",
-      "jws": "eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..eM6ZOcEYP3uFAZh1Pp6fjWyxgJAIZvEx1z2WOCrb40d2Un2kvVbdnYuFcCwflAcnakA_t4uLox6MIpmvn08bBQ"
+      "jws": "eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..vwwpJEY-XBQwWDjSPvyNOclAdSZgWBZjmTLSMWp8ip4L0fbr1bFhu0qB3rmtNUrKqGD-HL79QujWfcbN5W3MBQ"
     }
   ]
 }

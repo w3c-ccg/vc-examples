@@ -28,12 +28,12 @@
   "identifier": "83627465",
   "name": "Permanent Resident Card",
   "description": "Government of Example Permanent Resident Card.",
-  "issuanceDate": "2020-04-16T23:30:55Z",
+  "issuanceDate": "2020-04-21T18:00:54Z",
   "proof": {
     "type": "Ed25519Signature2018",
-    "created": "2020-04-17T01:18:20Z",
+    "created": "2020-04-21T18:00:54Z",
     "proofPurpose": "assertionMethod",
     "verificationMethod": "did:sov:danube:TVfus95c1sHBZxf2NsETqt#key-1",
-    "jws": "eyJjcml0IjpbImI2NCJdLCJiNjQiOmZhbHNlLCJhbGciOiJFZERTQSJ9..WregYBWcE5bMS_mJlQPs7jBS02j99kxMfE3ZwJzinXJLoRzqGH0xkfDV9WcI1Mketwqyh3tkdLbDvUcCFYJ7Aw"
+    "jws": "eyJjcml0IjpbImI2NCJdLCJiNjQiOmZhbHNlLCJhbGciOiJFZERTQSJ9..RD2hGOQdY7aF422H9eFRNHkenh1nmZqgAdOwAo1f4ds8qhh2a-0rShjHDw0pvxTQ1Wwi5jiNA7ZsP9wjdJaKDw"
   }
 }
