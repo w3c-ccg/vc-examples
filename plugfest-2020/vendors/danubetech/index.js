@@ -11,14 +11,24 @@ module.exports = {
   verifiable_presentations: [...verifiable_presentations],
   issuers: [
     {
-      name: "Universal Issuer",
+      name: "Universal Issuer (did:sov)",
       endpoint: "https://uniissuer.io/api/credentials/issueCredential",
       options: [
         {
-          issuer: "did:sov:danube:TVfus95c1sHBZxf2NsETqt",
-          assertionMethod: "did:sov:danube:TVfus95c1sHBZxf2NsETqt#key-1",
+          issuer: "did:sov:danube:VZoG2R1UneUscisG1eLxJb",
+          assertionMethod: "did:sov:danube:VZoG2R1UneUscisG1eLxJb#key-1",
         },
       ],
     },
+    {
+      name: "Universal Issuer (div:v1)",
+      endpoint: "https://uniissuer.io/api/credentials/issueCredential",
+      options: [
+        {
+          issuer: "did:v1:test:nym:z6MktyAYL7sVcmPQPTbbMqrnGMNwp6zkvRvKREs94f81fA1K",
+          assertionMethod: "did:v1:test:nym:z6MktyAYL7sVcmPQPTbbMqrnGMNwp6zkvRvKREs94f81fA1K#z6MkgumSeJ8FGqFjXFPJSsT2EFCNYVvx5RXDQ6oBYDrmtiDb",
+        },
+      ],
+    }
   ],
 };
