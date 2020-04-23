@@ -1,19 +1,22 @@
 {
   "@context": ["https://www.w3.org/2018/credentials/v1"],
   "type": ["VerifiablePresentation"],
-  "holder": "did:web:vc.transmute.world",
+  "holder": "did:key:z6Mkg7PwsafRCmTTaf8CDZQUBXz9gD8yNthZ8idu8hk3U2Ph",
   "verifiableCredential": [
     {
       "@context": [
         "https://www.w3.org/2018/credentials/v1",
         "https://www.w3.org/2018/credentials/examples/v1"
       ],
-      "id": "http://example.gov/credentials/3732",
-      "type": ["VerifiableCredential", "UniversityDegreeCredential"],
-      "issuer": "did:v1:test:nym:z6MkhdmzFu659ZJ4XKj31vtEDmjvsi5yDZG5L7Caz63oP39k",
+      "id": "http://example.gov/credentials/3732#30ea7ab3-a99d-4895-bf29-2429c9ea91b5",
+      "type": [
+        "VerifiableCredential",
+        "UniversityDegreeCredential"
+      ],
+      "issuer": "did:key:z6MktT2KTXK3So7Eskmvn96QccaVCGeLjFtpuGrTAY24Ls9X",
       "issuanceDate": "2020-03-10T04:24:12.164Z",
       "credentialSubject": {
-        "id": "did:key:z6MkjRagNiMu91DduvCvgEsqLZDVzrJzFrwahc4tXLt9DoHd",
+        "id": "did:key:z6Mkg9AkjefxdJFSphkStzXwHQnbweN43mCqA37aANGRxF1o",
         "degree": {
           "type": "BachelorDegree",
           "name": "Bachelor of Science and Arts"
@@ -21,20 +24,20 @@
       },
       "proof": {
         "type": "Ed25519Signature2018",
-        "created": "2019-12-11T03:50:55Z",
-        "verificationMethod": "did:v1:test:nym:z6MkhdmzFu659ZJ4XKj31vtEDmjvsi5yDZG5L7Caz63oP39k#z6MkiukuAuQAE8ozxvmahnQGzApvtW7KT5XXKfojjwbdEomY",
+        "created": "2020-04-23T17:41:30Z",
+        "jws": "eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..mdR9LFjoluhGmopoTfJsACRHXCdHYnCEEj47hF7ggjg0N82j6qqpqlHTxh_vUToqqcshpB5_99dbqrMxmqLODA",
         "proofPurpose": "assertionMethod",
-        "jws": "eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..uzx8px7eGewfc5Qa-GN1qjcYZH4nX3PBBaFW22x_573nnMu_Uzn6oT6ITL54QEk08XCqCE2OX2L-8ovsffXPDg"
+        "verificationMethod": "did:key:z6MktT2KTXK3So7Eskmvn96QccaVCGeLjFtpuGrTAY24Ls9X#z6MktT2KTXK3So7Eskmvn96QccaVCGeLjFtpuGrTAY24Ls9X"
       }
     }
   ],
   "proof": {
     "type": "Ed25519Signature2018",
-    "created": "2020-04-16T17:58:26Z",
-    "verificationMethod": "did:web:vc.transmute.world#z6MksHh7qHWvybLg5QTPPdG2DgEjjduBDArV9EF9mRiRzMBN",
-    "proofPurpose": "authentication",
-    "challenge": "99612b24-63d9-11ea-b99f-4f66f3e4f81a",
+    "created": "2020-04-23T17:41:34Z",
+    "challenge": "20ed2940-bcb0-4d2c-a747-d0a5bf0a4456",
     "domain": "issuer.example.com",
-    "jws": "eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..FtI4bekQdsVyx9OXcz4a6hL6Y2GAQ9gjA1_nQTmYXLCHenBnap-LlaLlh3DGXdATkXz7Oq5iCRcxTvc4aI7oCg"
+    "jws": "eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..Vw54CGUADA1DMNNFIqshsUhKPiBytjsOJ_FWApvpN2rcvrPkRL-kUM0SUDaXepB-txsdYmSpV6rI0rp7YN5rAA",
+    "proofPurpose": "authentication",
+    "verificationMethod": "did:key:z6Mkg7PwsafRCmTTaf8CDZQUBXz9gD8yNthZ8idu8hk3U2Ph#z6Mkg7PwsafRCmTTaf8CDZQUBXz9gD8yNthZ8idu8hk3U2Ph"
   }
 }
