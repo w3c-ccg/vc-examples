@@ -14,7 +14,7 @@ module.exports = {
     {
       name: "DID Key Issuer",
       endpoint:
-        "https://issuer.interop.digitalbazaar.com/credentials/issueCredential",
+        "https://issuer.interop.digitalbazaar.com/credentials/did%3Akey%3Az6MkkHSTSr9DSNLoioiVEZq8RKm9Sn1Xs4SjZXgzQASBMdc3/issueCredential",
       options: [
         {
           issuer: "did:key:z6Mkg9AkjefxdJFSphkStzXwHQnbweN43mCqA37aANGRxF1o",

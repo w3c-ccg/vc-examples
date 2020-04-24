@@ -51,7 +51,7 @@ See [this example](./vendors/transmute/index.js).
 #### Issue Credential HTTP API
 
 1. The Issuer's Issue Credential HTTP API MUST return a 201 HTTP response status code after successful credential issuance.
-2. The Issuer's Issue Credential HTTP API MUST require `"credential"` in the body of the POST request. The field `"credential"` MUST be conformant to [Verifiable Claims Data Model and Representations 1.0](https://www.w3.org/2017/05/vc-data-model/CGFR/2017-05-01/).
+2. The Issuer's Issue Credential HTTP API MUST require `"credential"` in the body of the POST request. The field `"credential"` MUST be conformant to [Verifiable Credentials Data Model 1.0](https://www.w3.org/TR/vc-data-model/).
 3. The Issuer's Issue Credential HTTP API MUST support the issuance of credentials with at least 2 different DID methods as the `"issuer"` on a Verifiable Credential.
 4. The Issuer's Issue Credential HTTP API MUST return a 400 HTTP response status code when the request is rejected.
 5. The Issuer's Issue Credential HTTP API MUST reject if the value of `"credential.issuer"` or `"credential.issuer.id"` in the body of the POST request is not a DID.
@@ -85,7 +85,6 @@ See [this example](./vendors/transmute/index.js).
 3. The Verifier's Verify Presentation HTTP API MUST adhere to the proof verification format.
 4. The Verifier's Verify Presentation HTTP API MUST provide an error object upon rejection.
 5. The Verifier's Verify Presentation HTTP API MUST support the the Ed25519 Cryptographic Suite.
-~~6. STRIKE: Verifier must return a 400 HTTP-Response if the issuer is not a did or issuer.id is not a did.~~ Remove?
 6. The Verifier's Verify Presentation HTTP API MAY verify a presentation with multiple credentials.
 7. The Verifier's Verify Presentation HTTP API MUST support `"options.challenge"` in the body of the POST request.
 

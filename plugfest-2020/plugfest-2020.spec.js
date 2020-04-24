@@ -1,3 +1,4 @@
+const uuid = require("uuid-random");
 const help = require("./help");
 const vendors = require("./vendors");
 
@@ -10,6 +11,9 @@ describe("Plugfest 2020", () => {
           describe(issuer.name + " " + issuer.endpoint, () => {
             describe("1. Issuer must return 201 HTTP-Response when a credential is successfully issued.", () => {
               it("positive test", async () => {
+                if(issuer.endpoint.includes('digitalbazaar.com')) {
+                  vendor.credentials = annotateWithUniqueId(vendor.credentials);
+                }
                 const body = {
                   credential: vendor.credentials[0],
                 };
@@ -21,6 +25,9 @@ describe("Plugfest 2020", () => {
 
             describe("2. Issuer must support the vc-credential data model with no options field.", () => {
               it("positive test", async () => {
+                if(issuer.endpoint.includes('digitalbazaar.com')) {
+                  vendor.credentials = annotateWithUniqueId(vendor.credentials);
+                }
                 const body = {
                   credential: vendor.credentials[0],
                 };
@@ -34,6 +41,10 @@ describe("Plugfest 2020", () => {
               it("test each option for " + issuer.name, async () => {
                 await Promise.all(
                   issuer.options.map(async (issuer_options) => {
+                    if(issuer.endpoint.includes('digitalbazaar.com')) {
+                      vendor.credentials =
+                        annotateWithUniqueId(vendor.credentials);
+                    }
                     const body = {
                       credential: vendor.credentials[0],
                       options: { ...issuer_options },
@@ -54,6 +65,9 @@ describe("Plugfest 2020", () => {
 
             describe("4. Issuer must return a 400 HTTP-Response when the request is rejected.", () => {
               it("positive test", async () => {
+                if(issuer.endpoint.includes('digitalbazaar.com')) {
+                  vendor.credentials = annotateWithUniqueId(vendor.credentials);
+                }
                 const body = {
                   credential: {
                     ...vendor.credentials[0],
@@ -67,6 +81,9 @@ describe("Plugfest 2020", () => {
 
             describe.skip("5. Issuer must reject if the issuer is not a did or issuer.id is not a did.", () => {
               it("should 400 when issuer is not a did", async () => {
+                if(issuer.endpoint.includes('digitalbazaar.com')) {
+                  vendor.credentials = annotateWithUniqueId(vendor.credentials);
+                }
                 const body = {
                   credential: {
                     ...vendor.credentials[0],
@@ -78,6 +95,9 @@ describe("Plugfest 2020", () => {
               });
 
               it("should 400 when issuer.id is not a did", async () => {
+                if(issuer.endpoint.includes('digitalbazaar.com')) {
+                  vendor.credentials = annotateWithUniqueId(vendor.credentials);
+                }
                 const body = {
                   credential: {
                     ...vendor.credentials[0],
@@ -93,6 +113,9 @@ describe("Plugfest 2020", () => {
 
             describe("6. Issuer must reject if the proofPurpose is not supported in controller", () => {
               it("positive test", async () => {
+                if(issuer.endpoint.includes('digitalbazaar.com')) {
+                  vendor.credentials = annotateWithUniqueId(vendor.credentials);
+                }
                 const body = {
                   credential: {
                     ...vendor.credentials[0],
@@ -108,6 +131,9 @@ describe("Plugfest 2020", () => {
 
             describe("7. Issuer must reject if the verificationMethod does not exist", () => {
               it("positive test", async () => {
+                if(issuer.endpoint.includes('digitalbazaar.com')) {
+                  vendor.credentials = annotateWithUniqueId(vendor.credentials);
+                }
                 const body = {
                   credential: {
                     ...vendor.credentials[0],
@@ -124,6 +150,9 @@ describe("Plugfest 2020", () => {
 
             describe("8. Issuer must reject if the credential does not contain a context", () => {
               it("positive test", async () => {
+                if(issuer.endpoint.includes('digitalbazaar.com')) {
+                  vendor.credentials = annotateWithUniqueId(vendor.credentials);
+                }
                 const body = {
                   credential: {
                     ...vendor.credentials[0],
@@ -137,6 +166,9 @@ describe("Plugfest 2020", () => {
 
             describe("9. Issuer must reject a malformed JSON-LD context.", () => {
               it("positive test", async () => {
+                if(issuer.endpoint.includes('digitalbazaar.com')) {
+                  vendor.credentials = annotateWithUniqueId(vendor.credentials);
+                }
                 const body = {
                   credential: {
                     ...vendor.credentials[0],
@@ -152,7 +184,6 @@ describe("Plugfest 2020", () => {
             });
           });
         });
-
         describe("3.2 Issuer must support issuance of credentials with at least 2 different DID methods as an issuer", () => {
           it("meets criteria after all issuers have been tested", async () => {
             expect(issuer_vms.length).toBeGreaterThanOrEqual(2);
@@ -168,6 +199,9 @@ describe("Plugfest 2020", () => {
               verifiableCredential: {
                 ...vendor.verifiable_credentials[0],
               },
+              options: {
+                checks: ["proof"]
+              }
             };
             const res = await help.postJson(endpoint, body);
             expect(res.status).toBe(200);
@@ -179,6 +213,9 @@ describe("Plugfest 2020", () => {
               verifiableCredential: {
                 ...vendor.verifiable_credentials[0],
               },
+              options: {
+                checks: ["proof"]
+              }
             };
             body.verifiableCredential.proof.jws += "bar";
             const res = await help.postJson(endpoint, body);
@@ -193,6 +230,9 @@ describe("Plugfest 2020", () => {
               verifiableCredential: {
                 ...vendor.verifiable_credentials[0],
               },
+              options: {
+                checks: ["proof"]
+              }
             };
             delete body.verifiableCredential.proof.created;
             const res = await help.postJson(endpoint, body);
@@ -207,6 +247,9 @@ describe("Plugfest 2020", () => {
               verifiableCredential: {
                 ...vendor.verifiable_credentials[0],
               },
+              options: {
+                checks: ["proof"]
+              }
             };
             body.verifiableCredential.proof.proofPurpose = "bar";
             const res = await help.postJson(endpoint, body);
@@ -221,6 +264,9 @@ describe("Plugfest 2020", () => {
               verifiableCredential: {
                 ...vendor.verifiable_credentials[0],
               },
+              options: {
+                checks: ["proof"]
+              }
             };
             body.verifiableCredential.newProp = "foo";
             const res = await help.postJson(endpoint, body);
@@ -235,6 +281,9 @@ describe("Plugfest 2020", () => {
               verifiableCredential: {
                 ...vendor.verifiable_credentials[0],
               },
+              options: {
+                checks: ["proof"]
+              }
             };
             delete body.verifiableCredential.issuer;
             const res = await help.postJson(endpoint, body);
@@ -249,6 +298,9 @@ describe("Plugfest 2020", () => {
               verifiableCredential: {
                 ...vendor.verifiable_credentials[0],
               },
+              options: {
+                checks: ["proof"]
+              }
             };
             body.verifiableCredential.issuer = "bar";
             const res = await help.postJson(endpoint, body);
@@ -263,6 +315,9 @@ describe("Plugfest 2020", () => {
               verifiableCredential: {
                 ...vendor.verifiable_credentials[0],
               },
+              options: {
+                checks: ["proof"]
+              }
             };
             body.verifiableCredential.proof.newProp = "bar";
             const res = await help.postJson(endpoint, body);
@@ -277,6 +332,9 @@ describe("Plugfest 2020", () => {
               verifiableCredential: {
                 ...vendor.verifiable_credentials[0],
               },
+              options: {
+                checks: ["proof"]
+              }
             };
             delete body.verifiableCredential.proof.proofPurpose;
             const res = await help.postJson(endpoint, body);
@@ -291,6 +349,9 @@ describe("Plugfest 2020", () => {
               verifiableCredential: {
                 ...vendor.verifiable_credentials[0],
               },
+              options: {
+                checks: ["proof"]
+              }
             };
             body.verifiableCredential.proof.created += "bar";
             const res = await help.postJson(endpoint, body);
@@ -336,7 +397,8 @@ describe("Plugfest 2020", () => {
                   const body = {
                     verifiablePresentation: vp,
                     options: {
-                      ...vp.proof,
+                      challenge: vp.proof.challenge,
+                      checks: ["proof"]
                     },
                   };
                   const res = await help.postJson(endpoint, body);
@@ -371,11 +433,11 @@ describe("Plugfest 2020", () => {
                   const body = {
                     verifiablePresentation: vp,
                     options: {
-                      ...vp.proof,
+                      challenge: vp.proof.challenge,
+                      checks: ["proof"]
                     },
                   };
                   const res = await help.postJson(endpoint, body);
-                  // console.log(res.body);
                   expect(res.status).toBe(200);
                   solutions.push(vp);
                 })
@@ -392,6 +454,9 @@ describe("Plugfest 2020", () => {
               verifiableCredential: {
                 ...vendor.verifiable_credentials[0],
               },
+              options: {
+                checks: ["proof"]
+              }
             };
             const res = await help.postJson(endpoint, body);
             expect(res.status).toBe(200);
@@ -405,7 +470,8 @@ describe("Plugfest 2020", () => {
                 ...vendor.verifiable_presentations[0],
               },
               options: {
-                ...vendor.verifiable_presentations[0].proof,
+                challenge: vendor.verifiable_presentations[0].proof.challenge,
+                checks: ["proof"]
               },
             };
             const res = await help.postJson(endpoint, body);
@@ -438,3 +504,10 @@ describe("Plugfest 2020", () => {
     });
   });
 });
+
+function annotateWithUniqueId(credentials) {
+  return credentials.map(credential => ({
+    ...credential,
+    id: `${credential.id}#${uuid()}`
+  }));
+}
