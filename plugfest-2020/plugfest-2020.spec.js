@@ -5,15 +5,15 @@ const vendors = require("./vendors");
 describe("Plugfest 2020", () => {
   vendors.forEach((vendor) => {
     describe(vendor.name, () => {
-      describe("Issuer HTTP APIs", () => {
+      describe.only("Issuer HTTP APIs", () => {
         let issuer_vms = [];
         vendor.issuers.forEach((issuer) => {
+          if(issuer.endpoint.includes('digitalbazaar.com')) {
+            vendor.credentials = annotateWithUniqueId(vendor.credentials);
+          }
           describe(issuer.name + " " + issuer.endpoint, () => {
-            describe("1. Issuer must return 201 HTTP-Response when a credential is successfully issued.", () => {
+            describe("1. The Issuer's Issue Credential HTTP API MUST return a 201 HTTP response status code after successful credential issuance.", () => {
               it("positive test", async () => {
-                if(issuer.endpoint.includes('digitalbazaar.com')) {
-                  vendor.credentials = annotateWithUniqueId(vendor.credentials);
-                }
                 const body = {
                   credential: vendor.credentials[0],
                 };
@@ -23,11 +23,8 @@ describe("Plugfest 2020", () => {
               });
             });
 
-            describe("2. Issuer must support the vc-credential data model with no options field.", () => {
+            describe(`2. The Issuer's Issue Credential HTTP API MUST require "credential" in the body of the POST request. The field "credential" MUST be conformant to [Verifiable Credentials Data Model 1.0](https://www.w3.org/TR/vc-data-model/).`, () => {
               it("positive test", async () => {
-                if(issuer.endpoint.includes('digitalbazaar.com')) {
-                  vendor.credentials = annotateWithUniqueId(vendor.credentials);
-                }
                 const body = {
                   credential: vendor.credentials[0],
                 };
@@ -37,33 +34,18 @@ describe("Plugfest 2020", () => {
               });
             });
 
-            describe("3.1 Can issue with all supplied options", () => {
-              it("test each option for " + issuer.name, async () => {
-                await Promise.all(
-                  issuer.options.map(async (issuer_options) => {
-                    if(issuer.endpoint.includes('digitalbazaar.com')) {
-                      vendor.credentials =
-                        annotateWithUniqueId(vendor.credentials);
-                    }
-                    const body = {
-                      credential: vendor.credentials[0],
-                      options: { ...issuer_options },
-                    };
-                    const res = await help.postJson(issuer.endpoint, body);
-                    expect(res.status).toBe(201);
-                    expect(res.body.proof).toBeDefined();
-                    if (
-                      issuer_vms.indexOf(res.body.proof.verificationMethod) ===
-                      -1
-                    ) {
-                      issuer_vms.push(res.body.proof.verificationMethod);
-                    }
-                  })
-                );
+            describe(`3. The Issuer's Issue Credential HTTP API MUST support the issuance of credentials with at least 2 different DID methods as the "issuer" on a Verifiable Credential.`, () => {
+              it("positive test", async () => {
+                const body = {
+                  credential: vendor.credentials[0],
+                };
+                const res = await help.postJson(issuer.endpoint, body);
+                expect(res.status).toBe(201);
+                expect(res.body.proof).toBeDefined();
               });
             });
 
-            describe("4. Issuer must return a 400 HTTP-Response when the request is rejected.", () => {
+            describe(`4. The Issuer's Issue Credential HTTP API MUST return a 400 HTTP response status code when the request is rejected.`, () => {
               it("positive test", async () => {
                 if(issuer.endpoint.includes('digitalbazaar.com')) {
                   vendor.credentials = annotateWithUniqueId(vendor.credentials);
@@ -79,11 +61,8 @@ describe("Plugfest 2020", () => {
               });
             });
 
-            describe.skip("5. Issuer must reject if the issuer is not a did or issuer.id is not a did.", () => {
-              it("should 400 when issuer is not a did", async () => {
-                if(issuer.endpoint.includes('digitalbazaar.com')) {
-                  vendor.credentials = annotateWithUniqueId(vendor.credentials);
-                }
+            describe(`5. The Issuer's Issue Credential HTTP API MUST reject if the value of "credential.issuer" or "credential.issuer.id" in the body of the POST request is not a URI.`, () => {
+              it("should 400 when issuer is not a URI", async () => {
                 const body = {
                   credential: {
                     ...vendor.credentials[0],
@@ -95,9 +74,6 @@ describe("Plugfest 2020", () => {
               });
 
               it("should 400 when issuer.id is not a did", async () => {
-                if(issuer.endpoint.includes('digitalbazaar.com')) {
-                  vendor.credentials = annotateWithUniqueId(vendor.credentials);
-                }
                 const body = {
                   credential: {
                     ...vendor.credentials[0],
@@ -111,11 +87,8 @@ describe("Plugfest 2020", () => {
               });
             });
 
-            describe("6. Issuer must reject if the proofPurpose is not supported in controller", () => {
+            describe(`6. The Issuer's Issue Credential HTTP API MUST reject if the value of "options.proofPurpose" in the body of the POST request is not supported.`, () => {
               it("positive test", async () => {
-                if(issuer.endpoint.includes('digitalbazaar.com')) {
-                  vendor.credentials = annotateWithUniqueId(vendor.credentials);
-                }
                 const body = {
                   credential: {
                     ...vendor.credentials[0],
@@ -129,11 +102,8 @@ describe("Plugfest 2020", () => {
               });
             });
 
-            describe("7. Issuer must reject if the verificationMethod does not exist", () => {
+            describe(`7. The Issuer's Issue Credential HTTP API MUST reject if the value of "options.assertionMethod" in the body of the POST request does not exist.`, () => {
               it("positive test", async () => {
-                if(issuer.endpoint.includes('digitalbazaar.com')) {
-                  vendor.credentials = annotateWithUniqueId(vendor.credentials);
-                }
                 const body = {
                   credential: {
                     ...vendor.credentials[0],
@@ -148,11 +118,8 @@ describe("Plugfest 2020", () => {
               });
             });
 
-            describe("8. Issuer must reject if the credential does not contain a context", () => {
+            describe(`8. The Issuer's Issue Credential HTTP API MUST reject if the value of "credential" in the body of the POST request does not contain a context.`, () => {
               it("positive test", async () => {
-                if(issuer.endpoint.includes('digitalbazaar.com')) {
-                  vendor.credentials = annotateWithUniqueId(vendor.credentials);
-                }
                 const body = {
                   credential: {
                     ...vendor.credentials[0],
@@ -164,7 +131,7 @@ describe("Plugfest 2020", () => {
               });
             });
 
-            describe("9. Issuer must reject a malformed JSON-LD context.", () => {
+            describe(`9. The Issuer's Issue Credential HTTP API MUST reject if the value of "credential" in the body of the POST request contains a malformed JSON-LD context.`, () => {
               it("positive test", async () => {
                 if(issuer.endpoint.includes('digitalbazaar.com')) {
                   vendor.credentials = annotateWithUniqueId(vendor.credentials);
@@ -182,8 +149,43 @@ describe("Plugfest 2020", () => {
                 expect(res.status).toBe(400);
               });
             });
-          });
+            });
+
+            
+            describe(`10. Issuer must support no "options" field in post body.`, () => {
+              it("positive test", async () => {
+                const body = {
+                  credential: vendor.credentials[0],
+                };
+                const res = await help.postJson(issuer.endpoint, body);
+                expect(res.status).toBe(201);
+                expect(res.body.proof).toBeDefined();
+              });
+            });
+
+            describe("3.1 Can issue with all supplied options", () => {
+              it("test each option for " + issuer.name, async () => {
+                await Promise.all(
+                  issuer.options.map(async (issuer_options) => {
+                    const body = {
+                      credential: vendor.credentials[0],
+                      options: { ...issuer_options },
+                    };
+                    const res = await help.postJson(issuer.endpoint, body);
+                    expect(res.status).toBe(201);
+                    expect(res.body.proof).toBeDefined();
+                    if (
+                      issuer_vms.indexOf(res.body.proof.verificationMethod) ===
+                      -1
+                    ) {
+                      issuer_vms.push(res.body.proof.verificationMethod);
+                    }
+                  })
+                );
+              });
+            });
         });
+        // This is here, becuase some vendors may only issue from a single did per endpoint.
         describe("3.2 Issuer must support issuance of credentials with at least 2 different DID methods as an issuer", () => {
           it("meets criteria after all issuers have been tested", async () => {
             expect(issuer_vms.length).toBeGreaterThanOrEqual(2);
