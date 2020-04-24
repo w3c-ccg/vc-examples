@@ -572,8 +572,8 @@ function cloneObj(obj) {
 }
 
 function annotateWithUniqueId(credentials) {
-  return credentials.map(credential => ({
+  return credentials.map(credential => (credential.id ? {
     ...credential,
     id: `${credential.id}#${uuid()}`
-  }));
+  } : credential));
 }
