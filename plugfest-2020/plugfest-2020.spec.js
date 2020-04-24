@@ -1,420 +1,439 @@
-const uuid = require("uuid-random");
-const help = require("./help");
-const vendors = require("./vendors");
+const uuid = require('uuid-random');
+const help = require('./help');
+const vendors = require('./vendors');
 
-describe("Plugfest 2020", () => {
-  vendors.forEach((vendor) => {
+describe('Plugfest 2020', () => {
+  vendors.forEach(vendor => {
     describe(vendor.name, () => {
-      describe("Issuer HTTP APIs", () => {
-        let issuer_vms = [];
-        vendor.issuers.forEach((issuer) => {
-          describe(issuer.name + " " + issuer.endpoint, () => {
-            describe("1. Issuer must return 201 HTTP-Response when a credential is successfully issued.", () => {
-              it("positive test", async () => {
-                if(issuer.endpoint.includes('digitalbazaar.com')) {
-                  vendor.credentials = annotateWithUniqueId(vendor.credentials);
-                }
-                const body = {
-                  credential: vendor.credentials[0],
-                };
-                const res = await help.postJson(issuer.endpoint, body);
-                expect(res.status).toBe(201);
-                expect(res.body.proof).toBeDefined();
-              });
-            });
-
-            describe("2. Issuer must support the vc-credential data model with no options field.", () => {
-              it("positive test", async () => {
-                if(issuer.endpoint.includes('digitalbazaar.com')) {
-                  vendor.credentials = annotateWithUniqueId(vendor.credentials);
-                }
-                const body = {
-                  credential: vendor.credentials[0],
-                };
-                const res = await help.postJson(issuer.endpoint, body);
-                expect(res.status).toBe(201);
-                expect(res.body.proof).toBeDefined();
-              });
-            });
-
-            describe("3.1 Can issue with all supplied options", () => {
-              it("test each option for " + issuer.name, async () => {
-                await Promise.all(
-                  issuer.options.map(async (issuer_options) => {
-                    if(issuer.endpoint.includes('digitalbazaar.com')) {
-                      vendor.credentials =
-                        annotateWithUniqueId(vendor.credentials);
-                    }
-                    const body = {
-                      credential: vendor.credentials[0],
-                      options: { ...issuer_options },
-                    };
-                    const res = await help.postJson(issuer.endpoint, body);
-                    expect(res.status).toBe(201);
-                    expect(res.body.proof).toBeDefined();
-                    if (
-                      issuer_vms.indexOf(res.body.proof.verificationMethod) ===
-                      -1
-                    ) {
-                      issuer_vms.push(res.body.proof.verificationMethod);
-                    }
-                  })
-                );
-              });
-            });
-
-            describe("4. Issuer must return a 400 HTTP-Response when the request is rejected.", () => {
-              it("positive test", async () => {
-                if(issuer.endpoint.includes('digitalbazaar.com')) {
-                  vendor.credentials = annotateWithUniqueId(vendor.credentials);
-                }
-                const body = {
-                  credential: {
-                    ...vendor.credentials[0],
-                    "@context": "force_error",
-                  },
-                };
-                const res = await help.postJson(issuer.endpoint, body);
-                expect(res.status).toBe(400);
-              });
-            });
-
-            describe.skip("5. Issuer must reject if the issuer is not a did or issuer.id is not a did.", () => {
-              it("should 400 when issuer is not a did", async () => {
-                if(issuer.endpoint.includes('digitalbazaar.com')) {
-                  vendor.credentials = annotateWithUniqueId(vendor.credentials);
-                }
-                const body = {
-                  credential: {
-                    ...vendor.credentials[0],
-                    issuer: "foo",
-                  },
-                };
-                const res = await help.postJson(issuer.endpoint, body);
-                expect(res.status).toBe(400);
+      describe('Issuer', () => {
+        describe('Issue Credential HTTP API', () => {
+          let credentials;
+          const issuer_vms = [];
+          vendor.issuers.forEach(issuer => {
+            describe(issuer.name + ' ' + issuer.endpoint, () => {
+              beforeEach(() => {
+                const clonedVendorCredentials = cloneObj(vendor.credentials);
+                credentials = annotateWithUniqueId(clonedVendorCredentials);
               });
 
-              it("should 400 when issuer.id is not a did", async () => {
-                if(issuer.endpoint.includes('digitalbazaar.com')) {
-                  vendor.credentials = annotateWithUniqueId(vendor.credentials);
-                }
-                const body = {
-                  credential: {
-                    ...vendor.credentials[0],
-                    issuer: {
-                      id: "foo",
+              // eslint-disable-next-line max-len
+              describe('1. The Issuer\'s Issue Credential HTTP API MUST return a 201 HTTP response status code after successful credential issuance.', () => {
+                it('positive test', async () => {
+                  const body = {
+                    credential: credentials[0],
+                  };
+                  const res = await help.postJson(issuer.endpoint, body);
+                  expect(res.status).toBe(201);
+                  expect(res.body.proof).toBeDefined();
+                });
+              });
+
+              // eslint-disable-next-line max-len
+              describe(`2. The Issuer's Issue Credential HTTP API MUST require "credential" in the body of the POST request. The field "credential" MUST be conformant to [Verifiable Credentials Data Model 1.0](https://www.w3.org/TR/vc-data-model/).`, () => {
+                it('positive test', async () => {
+                  const body = {
+                    credential: credentials[0],
+                  };
+                  const res = await help.postJson(issuer.endpoint, body);
+                  expect(res.status).toBe(201);
+                  expect(res.body.proof).toBeDefined();
+                });
+              });
+
+              describe('3.1 Can issue with all supplied options', () => {
+                it('test each option for ' + issuer.name, async () => {
+                  await Promise.all(
+                    issuer.options.map(async issuer_options => {
+                      const body = {
+                        credential: credentials[0],
+                        options: {...issuer_options},
+                      };
+                      const res = await help.postJson(issuer.endpoint, body);
+                      expect(res.status).toBe(201);
+                      expect(res.body.proof).toBeDefined();
+                      if(
+                        // eslint-disable-next-line max-len
+                        issuer_vms.indexOf(res.body.proof.verificationMethod) ===
+                        -1
+                      ) {
+                        issuer_vms.push(res.body.proof.verificationMethod);
+                      }
+                    })
+                  );
+                });
+              });
+
+              // eslint-disable-next-line max-len
+              describe(`4. The Issuer's Issue Credential HTTP API MUST return a 400 HTTP response status code when the request is rejected.`, () => {
+                it('positive test', async () => {
+                  const body = {
+                    credential: {
+                      ...credentials[0],
+                      '@context': 'force_error',
                     },
-                  },
-                };
-                const res = await help.postJson(issuer.endpoint, body);
-                expect(res.status).toBe(400);
+                  };
+                  const res = await help.postJson(issuer.endpoint, body);
+                  expect(res.status).toBe(400);
+                });
               });
-            });
 
-            describe("6. Issuer must reject if the proofPurpose is not supported in controller", () => {
-              it("positive test", async () => {
-                if(issuer.endpoint.includes('digitalbazaar.com')) {
-                  vendor.credentials = annotateWithUniqueId(vendor.credentials);
-                }
-                const body = {
-                  credential: {
-                    ...vendor.credentials[0],
-                  },
-                  options: {
-                    proofPurpose: "foo",
-                  },
-                };
-                const res = await help.postJson(issuer.endpoint, body);
-                expect(res.status).toBe(400);
+              // eslint-disable-next-line max-len
+              describe(`5. The Issuer's Issue Credential HTTP API MUST return a Verifiable Credential with the value of its "issuer" or "issuer.id" as a URI in the body of the response.`, () => {
+                it('positive test', async () => {
+                  const body = {
+                    credential: credentials[0],
+                  };
+                  const res = await help.postJson(issuer.endpoint, body);
+                  expect(res.status).toBe(201);
+                  expect(res.body).toBeDefined();
+                  expect(res.body.issuer).toBeDefined();
+                  const issuerId = res.body.issuer || res.body.issuer.id;
+                  expect(issuerId).toBeDefined();
+                });
               });
-            });
 
-            describe("7. Issuer must reject if the verificationMethod does not exist", () => {
-              it("positive test", async () => {
-                if(issuer.endpoint.includes('digitalbazaar.com')) {
-                  vendor.credentials = annotateWithUniqueId(vendor.credentials);
-                }
-                const body = {
-                  credential: {
-                    ...vendor.credentials[0],
-                  },
-                  options: {
-                    ...issuer.options[0],
-                    assertionMethod: "foo",
-                  },
-                };
-                const res = await help.postJson(issuer.endpoint, body);
-                expect(res.status).toBe(400);
+              // eslint-disable-next-line max-len
+              describe(`6. The Issuer's Issue Credential HTTP API MUST reject if the value of "options.proofPurpose" in the body of the POST request is not supported.`, () => {
+                it('positive test', async () => {
+                  const body = {
+                    credential: {
+                      ...credentials[0],
+                    },
+                    options: {
+                      proofPurpose: 'foo',
+                    },
+                  };
+                  const res = await help.postJson(issuer.endpoint, body);
+                  expect(res.status).toBe(400);
+                });
               });
-            });
 
-            describe("8. Issuer must reject if the credential does not contain a context", () => {
-              it("positive test", async () => {
-                if(issuer.endpoint.includes('digitalbazaar.com')) {
-                  vendor.credentials = annotateWithUniqueId(vendor.credentials);
-                }
-                const body = {
-                  credential: {
-                    ...vendor.credentials[0],
-                  },
-                };
-                delete body.credential["@context"];
-                const res = await help.postJson(issuer.endpoint, body);
-                expect(res.status).toBe(400);
+              // eslint-disable-next-line max-len
+              describe(`7. The Issuer's Issue Credential HTTP API MUST reject if the value of "options.assertionMethod" in the body of the POST request does not exist.`, () => {
+                it('positive test', async () => {
+                  const body = {
+                    credential: {
+                      ...credentials[0],
+                    },
+                    options: {
+                      ...issuer.options[0],
+                      assertionMethod: 'foo',
+                    },
+                  };
+                  const res = await help.postJson(issuer.endpoint, body);
+                  expect(res.status).toBe(400);
+                });
               });
-            });
 
-            describe("9. Issuer must reject a malformed JSON-LD context.", () => {
-              it("positive test", async () => {
-                if(issuer.endpoint.includes('digitalbazaar.com')) {
-                  vendor.credentials = annotateWithUniqueId(vendor.credentials);
-                }
-                const body = {
-                  credential: {
-                    ...vendor.credentials[0],
-                  },
-                };
-                body.credential["@context"] = [
-                  "https://www.w3.org/2018/credentials/v1",
-                  "broken",
-                ];
-                const res = await help.postJson(issuer.endpoint, body);
-                expect(res.status).toBe(400);
+              // eslint-disable-next-line max-len
+              describe(`8. The Issuer's Issue Credential HTTP API MUST reject if the value of "credential" in the body of the POST request does not contain a context.`, () => {
+                it('positive test', async () => {
+                  const body = {
+                    credential: {
+                      ...credentials[0],
+                    },
+                  };
+                  delete body.credential['@context'];
+                  const res = await help.postJson(issuer.endpoint, body);
+                  expect(res.status).toBe(400);
+                });
+              });
+
+              // eslint-disable-next-line max-len
+              describe(`9. The Issuer's Issue Credential HTTP API MUST reject if the value of "credential" in the body of the POST request contains a malformed JSON-LD context.`, () => {
+                it('positive test', async () => {
+                  const body = {
+                    credential: {
+                      ...credentials[0],
+                    },
+                  };
+                  body.credential['@context'] = [
+                    'https://www.w3.org/2018/credentials/v1',
+                    'broken',
+                  ];
+                  const res = await help.postJson(issuer.endpoint, body);
+                  expect(res.status).toBe(400);
+                });
+              });
+
+              // eslint-disable-next-line max-len
+              describe(`10. The Issuer's Issue Credential HTTP API MUST must support no "options" in the body of the POST request.`, () => {
+                it('positive test', async () => {
+                  const body = {
+                    credential: credentials[0],
+                  };
+                  const res = await help.postJson(issuer.endpoint, body);
+                  expect(res.status).toBe(201);
+                  expect(res.body.proof).toBeDefined();
+                });
               });
             });
           });
-        });
-        describe("3.2 Issuer must support issuance of credentials with at least 2 different DID methods as an issuer", () => {
-          it("meets criteria after all issuers have been tested", async () => {
-            expect(issuer_vms.length).toBeGreaterThanOrEqual(2);
+
+          // This is here, becuase some vendors may only issue from a single
+          // DID per endpoint.
+          // eslint-disable-next-line max-len
+          describe(`3. The Issuer's Issue Credential HTTP API MUST support the issuance of credentials with at least 2 different DID methods as the "issuer" on a Verifiable Credential.`, () => {
+            // eslint-disable-next-line max-len
+            it('meets criteria after all issuers have been tested', async () => {
+              expect(issuer_vms.length).toBeGreaterThanOrEqual(2);
+            });
           });
         });
       });
 
-      describe("Verifier", () => {
-        describe("1. Verifier must check for a Credential Signature Failure due to mutation of the jws property", () => {
-          it("should pass with no mutation", async () => {
-            const endpoint = vendor.verify_credential_endpoint;
-            const body = {
-              verifiableCredential: {
-                ...vendor.verifiable_credentials[0],
-              },
-              options: {
-                checks: ["proof"]
-              }
-            };
-            const res = await help.postJson(endpoint, body);
-            expect(res.status).toBe(200);
-            expect(res.body.checks).toEqual(["proof"]);
+      describe('Verifier', () => {
+        describe('Verify Credential HTTP API', () => {
+          let verifiableCredentials;
+          beforeEach(() => {
+            verifiableCredentials = cloneObj(vendor.verifiable_credentials);
           });
-          it("should fail with with mutation", async () => {
-            const endpoint = vendor.verify_credential_endpoint;
-            const body = {
-              verifiableCredential: {
-                ...vendor.verifiable_credentials[0],
-              },
-              options: {
-                checks: ["proof"]
-              }
-            };
-            body.verifiableCredential.proof.jws += "bar";
-            const res = await help.postJson(endpoint, body);
-            expect(res.status).toBe(400);
-          });
-        });
-
-        describe("2. Verifier must check for a Credential Signature Failure due to lack of create field", () => {
-          it("should fail with without created in proof", async () => {
-            const endpoint = vendor.verify_credential_endpoint;
-            const body = {
-              verifiableCredential: {
-                ...vendor.verifiable_credentials[0],
-              },
-              options: {
-                checks: ["proof"]
-              }
-            };
-            delete body.verifiableCredential.proof.created;
-            const res = await help.postJson(endpoint, body);
-            expect(res.status).toBe(400);
-          });
-        });
-
-        describe("3. Verifier must check for a Credential Signature Failure due to invalid proofPurpose", () => {
-          it("should fail ", async () => {
-            const endpoint = vendor.verify_credential_endpoint;
-            const body = {
-              verifiableCredential: {
-                ...vendor.verifiable_credentials[0],
-              },
-              options: {
-                checks: ["proof"]
-              }
-            };
-            body.verifiableCredential.proof.proofPurpose = "bar";
-            const res = await help.postJson(endpoint, body);
-            expect(res.status).toBe(400);
-          });
-        });
-
-        describe("4. Verifier must reject an added property to the credential", () => {
-          it("should fail", async () => {
-            const endpoint = vendor.verify_credential_endpoint;
-            const body = {
-              verifiableCredential: {
-                ...vendor.verifiable_credentials[0],
-              },
-              options: {
-                checks: ["proof"]
-              }
-            };
-            body.verifiableCredential.newProp = "foo";
-            const res = await help.postJson(endpoint, body);
-            expect(res.status).toBe(400);
-          });
-        });
-
-        describe("5. Verifier must reject a removed property to the credential", () => {
-          it("should fail", async () => {
-            const endpoint = vendor.verify_credential_endpoint;
-            const body = {
-              verifiableCredential: {
-                ...vendor.verifiable_credentials[0],
-              },
-              options: {
-                checks: ["proof"]
-              }
-            };
-            delete body.verifiableCredential.issuer;
-            const res = await help.postJson(endpoint, body);
-            expect(res.status).toBe(400);
-          });
-        });
-
-        describe("6. Verifier must reject a mutated property to the credential", () => {
-          it("should fail ", async () => {
-            const endpoint = vendor.verify_credential_endpoint;
-            const body = {
-              verifiableCredential: {
-                ...vendor.verifiable_credentials[0],
-              },
-              options: {
-                checks: ["proof"]
-              }
-            };
-            body.verifiableCredential.issuer = "bar";
-            const res = await help.postJson(endpoint, body);
-            expect(res.status).toBe(400);
-          });
-        });
-
-        describe("7. Verifier must reject an added property to the proof object", () => {
-          it("should fail ", async () => {
-            const endpoint = vendor.verify_credential_endpoint;
-            const body = {
-              verifiableCredential: {
-                ...vendor.verifiable_credentials[0],
-              },
-              options: {
-                checks: ["proof"]
-              }
-            };
-            body.verifiableCredential.proof.newProp = "bar";
-            const res = await help.postJson(endpoint, body);
-            expect(res.status).toBe(400);
-          });
-        });
-
-        describe("8. Verifier must reject a removed property to the proof object", () => {
-          it("should fail ", async () => {
-            const endpoint = vendor.verify_credential_endpoint;
-            const body = {
-              verifiableCredential: {
-                ...vendor.verifiable_credentials[0],
-              },
-              options: {
-                checks: ["proof"]
-              }
-            };
-            delete body.verifiableCredential.proof.proofPurpose;
-            const res = await help.postJson(endpoint, body);
-            expect(res.status).toBe(400);
-          });
-        });
-
-        describe("9. Verifier must reject a mutated property to the proof object", () => {
-          it("should fail ", async () => {
-            const endpoint = vendor.verify_credential_endpoint;
-            const body = {
-              verifiableCredential: {
-                ...vendor.verifiable_credentials[0],
-              },
-              options: {
-                checks: ["proof"]
-              }
-            };
-            body.verifiableCredential.proof.created += "bar";
-            const res = await help.postJson(endpoint, body);
-            expect(res.status).toBe(400);
-          });
-        });
-
-        describe.skip("10. Verifier must be able to verify credentials with at least 2 different DID methods as the did issuer", () => {
-          it("should pass", async () => {
-            const endpoint = vendor.verify_credential_endpoint;
-            const unique_issuers = [];
-            await Promise.all(
-              vendor.verifiable_credentials.map(async (vc) => {
-                const body = {
-                  verifiableCredential: vc,
-                };
-                const res = await help.postJson(endpoint, body);
-
-                expect(res.status).toBe(200);
-                if (unique_issuers.indexOf(vc.issuer) === -1) {
-                  unique_issuers.push(vc.issuer);
+          // eslint-disable-next-line max-len
+          describe(`1. The Verifier's Verify Credential HTTP API MUST fail to verify a Verifiable Credential with a mutated signature value (ex. a mutated jws) in the proof.`, () => {
+            it('should pass with no mutation', async () => {
+              const endpoint = vendor.verify_credential_endpoint;
+              const body = {
+                verifiableCredential: verifiableCredentials[0],
+                options: {
+                  checks: ['proof']
                 }
-              })
-            );
-            expect(unique_issuers.length).toBeGreaterThanOrEqual(2);
-          });
-        });
-
-        describe("12. Verifier must handle variations on issuer, holder and subject", () => {
-          describe("issuer, holder and subject are the same", () => {
-            it("should pass", async () => {
-              const endpoint = vendor.verify_presentation_endpoint;
-              // this logic needs to account for object and string variations...
-              const test_vps = vendor.verifiable_presentations.filter((vp) => {
-                return (
-                  vp.holder === vp.verifiableCredential[0].issuer &&
-                  vp.holder === vp.verifiableCredential[0].credentialSubject.id
-                );
-              });
-              const solutions = [];
-              await Promise.all(
-                test_vps.map(async (vp) => {
-                  const body = {
-                    verifiablePresentation: vp,
-                    options: {
-                      challenge: vp.proof.challenge,
-                      checks: ["proof"]
-                    },
-                  };
-                  const res = await help.postJson(endpoint, body);
-                  expect(res.status).toBe(200);
-                  solutions.push(vp);
-                })
-              );
-              expect(solutions.length).toBeGreaterThanOrEqual(1);
+              };
+              const res = await help.postJson(endpoint, body);
+              expect(res.status).toBe(200);
+              expect(res.body.checks).toEqual(['proof']);
+            });
+            it('should fail with with mutation', async () => {
+              const endpoint = vendor.verify_credential_endpoint;
+              const body = {
+                verifiableCredential: verifiableCredentials[0],
+                options: {
+                  checks: ['proof']
+                }
+              };
+              body.verifiableCredential.proof.jws += 'bar';
+              const res = await help.postJson(endpoint, body);
+              expect(res.status).toBe(400);
             });
           });
-          describe("issuer, holder and subject are the different", () => {
-            it.skip("should pass", async () => {
+
+          // eslint-disable-next-line max-len
+          describe(`2. The Verifier's Verify Credential HTTP API MUST fail to verify a Verifiable Credential with the "created" property removed from the proof.`, () => {
+            it('should fail with without created in proof', async () => {
+              const endpoint = vendor.verify_credential_endpoint;
+              const body = {
+                verifiableCredential: verifiableCredentials[0],
+                options: {
+                  checks: ['proof']
+                }
+              };
+              delete body.verifiableCredential.proof.created;
+              const res = await help.postJson(endpoint, body);
+              expect(res.status).toBe(400);
+            });
+          });
+
+          // eslint-disable-next-line max-len
+          describe(`3. The Verifier's Verify Credential HTTP API MUST fail to verify a Verifiable Credential with a mutated "proofPurpose" in the proof.`, () => {
+            it('should fail ', async () => {
+              const endpoint = vendor.verify_credential_endpoint;
+              const body = {
+                verifiableCredential: verifiableCredentials[0],
+                options: {
+                  checks: ['proof']
+                }
+              };
+              body.verifiableCredential.proof.proofPurpose = 'bar';
+              const res = await help.postJson(endpoint, body);
+              expect(res.status).toBe(400);
+            });
+          });
+
+          // eslint-disable-next-line max-len
+          describe('4. The Verifier\'s Verify Credential HTTP API MUST fail to verify a Verifiable Credential with an added property to the credential.', () => {
+            it('should fail', async () => {
+              const endpoint = vendor.verify_credential_endpoint;
+              const body = {
+                verifiableCredential: verifiableCredentials[0],
+                options: {
+                  checks: ['proof']
+                }
+              };
+              body.verifiableCredential.newProp = 'foo';
+              const res = await help.postJson(endpoint, body);
+              expect(res.status).toBe(400);
+            });
+          });
+
+          // eslint-disable-next-line max-len
+          describe('5. The Verifier\'s Verify Credential HTTP API MUST fail to verify a Verifiable Credential with a removed property from the credential.', () => {
+            it('should fail', async () => {
+              const endpoint = vendor.verify_credential_endpoint;
+              const body = {
+                verifiableCredential: verifiableCredentials[0],
+                options: {
+                  checks: ['proof']
+                }
+              };
+              delete body.verifiableCredential.issuer;
+              const res = await help.postJson(endpoint, body);
+              expect(res.status).toBe(400);
+            });
+          });
+
+          // eslint-disable-next-line max-len
+          describe('6. The Verifier\'s Verify Credential HTTP API MUST fail to verify a Verifiable Credential with a mutated property to the credential.', () => {
+            it('should fail ', async () => {
+              const endpoint = vendor.verify_credential_endpoint;
+              const body = {
+                verifiableCredential: verifiableCredentials[0],
+                options: {
+                  checks: ['proof']
+                }
+              };
+              body.verifiableCredential.issuer = 'bar';
+              const res = await help.postJson(endpoint, body);
+              expect(res.status).toBe(400);
+            });
+          });
+
+          // eslint-disable-next-line max-len
+          describe('7. The Verifier\'s Verify Credential HTTP API MUST fail to verify a Verifiable Credential with an added property to the proof.', () => {
+            it('should fail ', async () => {
+              const endpoint = vendor.verify_credential_endpoint;
+              const body = {
+                verifiableCredential: verifiableCredentials[0],
+                options: {
+                  checks: ['proof']
+                }
+              };
+              body.verifiableCredential.proof.newProp = 'bar';
+              const res = await help.postJson(endpoint, body);
+              expect(res.status).toBe(400);
+            });
+          });
+
+          // eslint-disable-next-line max-len
+          describe('8. The Verifier\'s Verify Credential HTTP API MUST fail to verify a Verifiable Credential a removed property to the proof.', () => {
+            it('should fail ', async () => {
+              const endpoint = vendor.verify_credential_endpoint;
+              const body = {
+                verifiableCredential: verifiableCredentials[0],
+                options: {
+                  checks: ['proof']
+                }
+              };
+              delete body.verifiableCredential.proof.proofPurpose;
+              const res = await help.postJson(endpoint, body);
+              expect(res.status).toBe(400);
+            });
+          });
+
+          // eslint-disable-next-line max-len
+          describe('9. The Verifier\'s Verify Credential HTTP API MUST fail to verify a Verifiable Credential with a mutated property to the proof.', () => {
+            it('should fail ', async () => {
+              const endpoint = vendor.verify_credential_endpoint;
+              const body = {
+                verifiableCredential: verifiableCredentials[0],
+                options: {
+                  checks: ['proof']
+                }
+              };
+              body.verifiableCredential.proof.created += 'bar';
+              const res = await help.postJson(endpoint, body);
+              expect(res.status).toBe(400);
+            });
+          });
+
+          // eslint-disable-next-line max-len
+          describe('10. The Verifier\'s Verify Credential HTTP API MUST verify a Verifiable Credential with at least 2 different DID methods set as the issuer property for a credential.', () => {
+            it('should pass', async () => {
+              const endpoint = vendor.verify_credential_endpoint;
+              const unique_issuers = [];
+              await Promise.all(
+                vendor.verifiable_credentials.map(async vc => {
+                  const body = {
+                    verifiableCredential: vc,
+                    options: {
+                      checks: ['proof']
+                    }
+                  };
+                  const res = await help.postJson(endpoint, body);
+
+                  expect(res.status).toBe(200);
+                  if(unique_issuers.indexOf(vc.issuer) === -1) {
+                    unique_issuers.push(vc.issuer);
+                  }
+                })
+              );
+              expect(unique_issuers.length).toBeGreaterThanOrEqual(2);
+            });
+          });
+
+          // eslint-disable-next-line max-len
+          describe('11. The Verifier\'s Verify Credential HTTP API MUST adhere to the proof verification format.', () => {
+            it('should pass', async () => {
+              const endpoint = vendor.verify_credential_endpoint;
+              const body = {
+                verifiableCredential: verifiableCredentials[0],
+                options: {
+                  checks: ['proof']
+                }
+              };
+              const res = await help.postJson(endpoint, body);
+              expect(res.status).toBe(200);
+              expect(res.body.checks).toEqual(['proof']);
+            });
+          });
+
+          // eslint-disable-next-line max-len
+          describe('12. The Verifier\'s Verify Credential HTTP API MUST return a 400 HTTP response status code when the request is rejected.', () => {
+            it('should have error', async () => {
+              const endpoint = vendor.verify_credential_endpoint;
+              const body = {
+                verifiableCredential: null,
+                options: {
+                  checks: ['proof']
+                }
+              };
+              const res = await help.postJson(endpoint, body);
+              expect(res.status).toBe(400);
+            });
+          });
+
+          // eslint-disable-next-line max-len
+          describe('13. The Verifier\'s Verify Credential HTTP API MUST support the verification of, JSON-LD Proof, Ed25519Signature2018.', () => {
+            it('should pass', async () => {
+              const endpoint = vendor.verify_credential_endpoint;
+              const vc = verifiableCredentials[0];
+              const proof = Array.isArray(vc.proof) ? vc.proof : [vc.proof];
+              const type = 'Ed25519Signature2018';
+              const ed25519Signature2018 = proof.find(p => p.type === type);
+              expect(ed25519Signature2018).toBeDefined();
+              const body = {
+                verifiableCredential: vc,
+                options: {
+                  checks: ['proof']
+                }
+              };
+              const res = await help.postJson(endpoint, body);
+              expect(res.status).toBe(200);
+              expect(res.body.checks).toEqual(['proof']);
+            });
+          });
+        });
+
+        describe('Verify Presentation HTTP API', () => {
+          let verifiablePresentations;
+          beforeEach(() => {
+            verifiablePresentations = cloneObj(vendor.verifiable_presentations);
+          });
+          // eslint-disable-next-line max-len
+          describe(`1. The Verifier's Verify Presentation HTTP API MUST verify a Verifiable Presentation where the credential's issuer, presentation's holder and credential's subject are different.`, () => {
+            it('should pass', async () => {
               const endpoint = vendor.verify_presentation_endpoint;
               const solutions = [];
               // this logic needs to account for object and string variations...
-              const test_vps = vendor.verifiable_presentations.filter((vp) => {
+              const test_vps = verifiablePresentations.filter(vp => {
                 return (
                   vp.holder !== vp.verifiableCredential[0].issuer &&
                   vp.holder !==
@@ -424,8 +443,8 @@ describe("Plugfest 2020", () => {
                 );
               });
               await Promise.all(
-                test_vps.map(async (vp) => {
-                  // this logic needs to account for objet and string variations...
+                test_vps.map(async vp => {
+                  // this logic needs to account for objet and string variations
                   expect(vp.holder).not.toBe(vp.verifiableCredential[0].issuer);
                   expect(vp.holder).not.toBe(
                     vp.verifiableCredential[0].credentialSubject.id
@@ -434,7 +453,7 @@ describe("Plugfest 2020", () => {
                     verifiablePresentation: vp,
                     options: {
                       challenge: vp.proof.challenge,
-                      checks: ["proof"]
+                      checks: ['proof']
                     },
                   };
                   const res = await help.postJson(endpoint, body);
@@ -445,65 +464,112 @@ describe("Plugfest 2020", () => {
               expect(solutions.length).toBeGreaterThanOrEqual(1);
             });
           });
-        });
 
-        describe("13. Verifier response must adhere to proof verification format for credential and presentation", () => {
-          it.skip("credential", async () => {
-            const endpoint = vendor.verify_credential_endpoint;
-            const body = {
-              verifiableCredential: {
-                ...vendor.verifiable_credentials[0],
-              },
-              options: {
-                checks: ["proof"]
-              }
-            };
-            const res = await help.postJson(endpoint, body);
-            expect(res.status).toBe(200);
-            expect(res.body.checks).toEqual(["proof"]);
+          // eslint-disable-next-line max-len
+          describe(`2. The Verifier's Verify Presentation HTTP API MUST verify a Verifiable Presentation where the credential's issuer, presentation's holder and credential's subject are the same.`, () => {
+            it('should pass', async () => {
+              const endpoint = vendor.verify_presentation_endpoint;
+              // this logic needs to account for object and string variations...
+              const test_vps = verifiablePresentations.filter(vp => {
+                return (
+                  vp.holder === vp.verifiableCredential[0].issuer &&
+                  vp.holder === vp.verifiableCredential[0].credentialSubject.id
+                );
+              });
+              const solutions = [];
+              await Promise.all(
+                test_vps.map(async vp => {
+                  const body = {
+                    verifiablePresentation: vp,
+                    options: {
+                      challenge: vp.proof.challenge,
+                      checks: ['proof']
+                    },
+                  };
+                  const res = await help.postJson(endpoint, body);
+                  expect(res.status).toBe(200);
+                  solutions.push(vp);
+                })
+              );
+              expect(solutions.length).toBeGreaterThanOrEqual(1);
+            });
           });
 
-          it("presentation", async () => {
-            const endpoint = vendor.verify_presentation_endpoint;
-            const body = {
-              verifiablePresentation: {
-                ...vendor.verifiable_presentations[0],
-              },
-              options: {
-                challenge: vendor.verifiable_presentations[0].proof.challenge,
-                checks: ["proof"]
-              },
-            };
-            const res = await help.postJson(endpoint, body);
-            expect(res.status).toBe(200);
-            expect(res.body.checks).toEqual(["proof"]);
+          // eslint-disable-next-line max-len
+          describe('3. The Verifier\'s Verify Presentation HTTP API MUST adhere to the proof verification format.', () => {
+            it('should pass', async () => {
+              const endpoint = vendor.verify_presentation_endpoint;
+              const body = {
+                verifiablePresentation: verifiablePresentations[0],
+                options: {
+                  challenge: verifiablePresentations[0].proof.challenge,
+                  checks: ['proof']
+                },
+              };
+              const res = await help.postJson(endpoint, body);
+              expect(res.status).toBe(200);
+              expect(res.body.checks).toEqual(['proof']);
+            });
           });
-        });
 
-        describe.skip("14. Verifier error response must provide an error object", () => {
-          it("should have error", async () => {
-            const endpoint = vendor.verify_presentation_endpoint;
-            const body = {
-              verifiablePresentation: {
-                ...vendor.verifiable_presentations[0],
-              },
-            };
-            const res = await help.postJson(endpoint, body);
-            expect(res.status).toBe(400);
-            expect(res.body.error).toBeDefined();
+          // eslint-disable-next-line max-len
+          describe('4. The Verifier\'s Verify Presentation HTTP API MUST return a 400 HTTP response status code when the request is rejected.', () => {
+            it('should have error', async () => {
+              const endpoint = vendor.verify_presentation_endpoint;
+              const body = {
+                verifiablePresentation: null,
+                options: {
+                  challenge: verifiablePresentations[0].proof.challenge,
+                  checks: ['proof']
+                },
+              };
+              const res = await help.postJson(endpoint, body);
+              expect(res.status).toBe(400);
+            });
           });
-        });
 
-        // Reguires valid VC where issuer is not a DID...
-        describe.skip("16. Verifier must return a 400 HTTP-Response if the issuer is not a did or issuer.id is not a did.", () => {
-          it("should have error", async () => {
-            expect(false).toBe(true);
+          // eslint-disable-next-line max-len
+          describe('5. The Verifier\'s Verify Presentation HTTP API MUST support the verification of, JSON-LD Proof, Ed25519Signature2018.', () => {
+            it('should pass', async () => {
+              const endpoint = vendor.verify_presentation_endpoint;
+              const vp = verifiablePresentations[0];
+              const proof = Array.isArray(vp.proof) ? vp.proof : [vp.proof];
+              const type = 'Ed25519Signature2018';
+              const ed25519Signature2018 = proof.find(p => p.type === type);
+              expect(ed25519Signature2018).toBeDefined();
+              const body = {
+                verifiablePresentation: verifiablePresentations[0],
+                options: {
+                  challenge: verifiablePresentations[0].proof.challenge,
+                  checks: ['proof']
+                },
+              };
+              const res = await help.postJson(endpoint, body);
+              expect(res.status).toBe(200);
+              expect(res.body.checks).toEqual(['proof']);
+            });
+          });
+
+          // eslint-disable-next-line max-len
+          describe(`6. The Verifier's Verify Presentation HTTP API MUST support "options.challenge" in the body of the POST request.`, () => {
+            it('should have error', async () => {
+              const endpoint = vendor.verify_presentation_endpoint;
+              const body = {
+                verifiablePresentation: verifiablePresentations[0],
+              };
+              const res = await help.postJson(endpoint, body);
+              expect(res.status).toBe(400);
+            });
           });
         });
       });
     });
   });
 });
+
+function cloneObj(obj) {
+  return JSON.parse(JSON.stringify(obj));
+}
 
 function annotateWithUniqueId(credentials) {
   return credentials.map(credential => ({
