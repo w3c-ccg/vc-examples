@@ -5,18 +5,18 @@ const verifiable_credentials = require('./verifiable_credentials');
 const verifiable_presentations = require('./verifiable_presentations');
 
 module.exports = {
-  name: 'Transmute',
+  name: 'Factom',
   // eslint-disable-next-line max-len
-  verify_credential_endpoint: 'https://2974efcb.ngrok.io/services/verify/credentials',
+  verify_credential_endpoint: 'http://localhost:8080/services/verify/credentials',
   // eslint-disable-next-line max-len
-  verify_presentation_endpoint: '',
+  verify_presentation_endpoint: 'http://localhost:8080/services/verify/presentations',
   credentials: [...credentials],
   verifiable_credentials: [...verifiable_credentials],
   verifiable_presentations: [...verifiable_presentations],
   issuers: [
     {
       name: 'DID Issuers',
-      endpoint: 'https://2974efcb.ngrok.io/services/issue/credentials',
+      endpoint: 'http://localhost:8080/services/issue/credentials',
       options: [
         {
           issuer: 'did:factom:5d0dd58757119dd437c70d92b44fbf86627ee275f0f2146c3d99e441da342d9f',
