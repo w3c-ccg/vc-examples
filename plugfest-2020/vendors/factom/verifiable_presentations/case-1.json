@@ -34,12 +34,13 @@
       }
     }
   ],
+  "holder": "did:factom:5d0dd58757119dd437c70d92b44fbf86627ee275f0f2146c3d99e441da342d9f",
   "proof": {
     "type": "Ed25519Signature2018",
-    "created": "2020-04-25T11:20:11Z",
-    "challenge": "be4980b5-b72c-4184-8ba8-12f2ee7a1706",
+    "created": "2020-04-26T21:24:11Z",
+    "challenge": "c116ff91-8807-439d-81d8-c23783edae9d",
     "domain": "issuer.example.com",
-    "jws": "eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..WtE7k7PI7wSKh82yp5wWtgByTu4kUPu4Vo13rbWZv07XQ7eBLAgZH-ewIka7Tqz0ZMs6rVMCVqwUUnOY9UljDg",
+    "jws": "eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..53JU-HrqnrTM46mcopmeSQ016lbqWh7rXH-pGvPuZ9GwxqkGz2Qn4eE5ySLFmvbLC59nBx55rrydxLF1JIJuCw",
     "proofPurpose": "authentication",
     "verificationMethod": "did:factom:5d0dd58757119dd437c70d92b44fbf86627ee275f0f2146c3d99e441da342d9f#key-0"
   }
