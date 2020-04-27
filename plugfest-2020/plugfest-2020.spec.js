@@ -463,8 +463,6 @@ describe('Plugfest 2020', () => {
                     },
                   };
                   const res = await help.postJson(endpoint, body);
-                  // console.log(JSON.stringify(body, null, 2));
-                  // console.log(JSON.stringify(res, null, 2));
                   expect(res.status).toBe(200);
                   solutions.push(vp);
                 })
