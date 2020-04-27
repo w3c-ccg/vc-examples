@@ -459,6 +459,7 @@ describe('Plugfest 2020', () => {
                     verifiablePresentation: vp,
                     options: {
                       challenge: vp.proof.challenge,
+                      domain: vp.proof.domain,
                       checks: ['proof'],
                     },
                   };
@@ -489,6 +490,7 @@ describe('Plugfest 2020', () => {
                     verifiablePresentation: vp,
                     options: {
                       challenge: vp.proof.challenge,
+                      domain: vp.proof.domain,
                       checks: ['proof'],
                     },
                   };
@@ -509,6 +511,7 @@ describe('Plugfest 2020', () => {
                 verifiablePresentation: verifiablePresentations[0],
                 options: {
                   challenge: verifiablePresentations[0].proof.challenge,
+                  domain: verifiablePresentations[0].proof.domain,
                   checks: ['proof'],
                 },
               };
@@ -526,6 +529,7 @@ describe('Plugfest 2020', () => {
                 verifiablePresentation: null,
                 options: {
                   challenge: verifiablePresentations[0].proof.challenge,
+                  domain: verifiablePresentations[0].proof.domain,
                   checks: ['proof'],
                 },
               };
@@ -547,6 +551,7 @@ describe('Plugfest 2020', () => {
                 verifiablePresentation: verifiablePresentations[0],
                 options: {
                   challenge: verifiablePresentations[0].proof.challenge,
+                  domain: verifiablePresentations[0].proof.domain,
                   checks: ['proof'],
                 },
               };
