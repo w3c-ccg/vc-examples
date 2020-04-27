@@ -3,7 +3,7 @@ const digital_bazaar = require('./digital_bazaar');
 const danubetech = require('./danubetech');
 const mavennet = require('./mavennet');
 const trustbloc = require('./trustbloc');
-const sicpa = require("./sicpa");
+const sicpa = require('./sicpa');
 
 const vendor_map = {
   transmute,
