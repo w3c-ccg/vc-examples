@@ -2,6 +2,11 @@ const uuid = require('uuid-random');
 const help = require('./help');
 const vendors = require('./vendors');
 
+// sometimes did resolution takes a long time...
+// sometimes http requests are throttled when getting hammered by test suite...
+// eslint-disable-next-line
+jest.setTimeout(20 * 1000);
+
 describe('Plugfest 2020', () => {
   vendors.forEach(vendor => {
     describe(vendor.name, () => {
@@ -53,8 +58,9 @@ describe('Plugfest 2020', () => {
                       expect(res.body.proof).toBeDefined();
                       if(
                         // eslint-disable-next-line max-len
-                        issuer_vms.indexOf(res.body.proof.verificationMethod) ===
-                        -1
+                        issuer_vms.indexOf(
+                          res.body.proof.verificationMethod
+                        ) === -1
                       ) {
                         issuer_vms.push(res.body.proof.verificationMethod);
                       }
@@ -195,8 +201,8 @@ describe('Plugfest 2020', () => {
               const body = {
                 verifiableCredential: verifiableCredentials[0],
                 options: {
-                  checks: ['proof']
-                }
+                  checks: ['proof'],
+                },
               };
               const res = await help.postJson(endpoint, body);
               expect(res.status).toBe(200);
@@ -207,8 +213,8 @@ describe('Plugfest 2020', () => {
               const body = {
                 verifiableCredential: verifiableCredentials[0],
                 options: {
-                  checks: ['proof']
-                }
+                  checks: ['proof'],
+                },
               };
               body.verifiableCredential.proof.jws += 'bar';
               const res = await help.postJson(endpoint, body);
@@ -223,8 +229,8 @@ describe('Plugfest 2020', () => {
               const body = {
                 verifiableCredential: verifiableCredentials[0],
                 options: {
-                  checks: ['proof']
-                }
+                  checks: ['proof'],
+                },
               };
               delete body.verifiableCredential.proof.created;
               const res = await help.postJson(endpoint, body);
@@ -237,10 +243,10 @@ describe('Plugfest 2020', () => {
             it('should fail ', async () => {
               const endpoint = vendor.verify_credential_endpoint;
               const body = {
-                verifiableCredential: verifiableCredentials[0],
+                verifiableCredential: {...verifiableCredentials[0]},
                 options: {
-                  checks: ['proof']
-                }
+                  checks: ['proof'],
+                },
               };
               body.verifiableCredential.proof.proofPurpose = 'bar';
               const res = await help.postJson(endpoint, body);
@@ -255,8 +261,8 @@ describe('Plugfest 2020', () => {
               const body = {
                 verifiableCredential: verifiableCredentials[0],
                 options: {
-                  checks: ['proof']
-                }
+                  checks: ['proof'],
+                },
               };
               body.verifiableCredential.newProp = 'foo';
               const res = await help.postJson(endpoint, body);
@@ -271,8 +277,8 @@ describe('Plugfest 2020', () => {
               const body = {
                 verifiableCredential: verifiableCredentials[0],
                 options: {
-                  checks: ['proof']
-                }
+                  checks: ['proof'],
+                },
               };
               delete body.verifiableCredential.issuer;
               const res = await help.postJson(endpoint, body);
@@ -287,8 +293,8 @@ describe('Plugfest 2020', () => {
               const body = {
                 verifiableCredential: verifiableCredentials[0],
                 options: {
-                  checks: ['proof']
-                }
+                  checks: ['proof'],
+                },
               };
               body.verifiableCredential.issuer = 'bar';
               const res = await help.postJson(endpoint, body);
@@ -303,8 +309,8 @@ describe('Plugfest 2020', () => {
               const body = {
                 verifiableCredential: verifiableCredentials[0],
                 options: {
-                  checks: ['proof']
-                }
+                  checks: ['proof'],
+                },
               };
               body.verifiableCredential.proof.newProp = 'bar';
               const res = await help.postJson(endpoint, body);
@@ -319,8 +325,8 @@ describe('Plugfest 2020', () => {
               const body = {
                 verifiableCredential: verifiableCredentials[0],
                 options: {
-                  checks: ['proof']
-                }
+                  checks: ['proof'],
+                },
               };
               delete body.verifiableCredential.proof.proofPurpose;
               const res = await help.postJson(endpoint, body);
@@ -335,8 +341,8 @@ describe('Plugfest 2020', () => {
               const body = {
                 verifiableCredential: verifiableCredentials[0],
                 options: {
-                  checks: ['proof']
-                }
+                  checks: ['proof'],
+                },
               };
               body.verifiableCredential.proof.created += 'bar';
               const res = await help.postJson(endpoint, body);
@@ -354,8 +360,8 @@ describe('Plugfest 2020', () => {
                   const body = {
                     verifiableCredential: vc,
                     options: {
-                      checks: ['proof']
-                    }
+                      checks: ['proof'],
+                    },
                   };
                   const res = await help.postJson(endpoint, body);
 
@@ -376,8 +382,8 @@ describe('Plugfest 2020', () => {
               const body = {
                 verifiableCredential: verifiableCredentials[0],
                 options: {
-                  checks: ['proof']
-                }
+                  checks: ['proof'],
+                },
               };
               const res = await help.postJson(endpoint, body);
               expect(res.status).toBe(200);
@@ -392,8 +398,8 @@ describe('Plugfest 2020', () => {
               const body = {
                 verifiableCredential: null,
                 options: {
-                  checks: ['proof']
-                }
+                  checks: ['proof'],
+                },
               };
               const res = await help.postJson(endpoint, body);
               expect(res.status).toBe(400);
@@ -412,8 +418,8 @@ describe('Plugfest 2020', () => {
               const body = {
                 verifiableCredential: vc,
                 options: {
-                  checks: ['proof']
-                }
+                  checks: ['proof'],
+                },
               };
               const res = await help.postJson(endpoint, body);
               expect(res.status).toBe(200);
@@ -453,7 +459,7 @@ describe('Plugfest 2020', () => {
                     verifiablePresentation: vp,
                     options: {
                       challenge: vp.proof.challenge,
-                      checks: ['proof']
+                      checks: ['proof'],
                     },
                   };
                   const res = await help.postJson(endpoint, body);
@@ -483,7 +489,7 @@ describe('Plugfest 2020', () => {
                     verifiablePresentation: vp,
                     options: {
                       challenge: vp.proof.challenge,
-                      checks: ['proof']
+                      checks: ['proof'],
                     },
                   };
                   const res = await help.postJson(endpoint, body);
@@ -503,7 +509,7 @@ describe('Plugfest 2020', () => {
                 verifiablePresentation: verifiablePresentations[0],
                 options: {
                   challenge: verifiablePresentations[0].proof.challenge,
-                  checks: ['proof']
+                  checks: ['proof'],
                 },
               };
               const res = await help.postJson(endpoint, body);
@@ -520,7 +526,7 @@ describe('Plugfest 2020', () => {
                 verifiablePresentation: null,
                 options: {
                   challenge: verifiablePresentations[0].proof.challenge,
-                  checks: ['proof']
+                  checks: ['proof'],
                 },
               };
               const res = await help.postJson(endpoint, body);
@@ -541,7 +547,7 @@ describe('Plugfest 2020', () => {
                 verifiablePresentation: verifiablePresentations[0],
                 options: {
                   challenge: verifiablePresentations[0].proof.challenge,
-                  checks: ['proof']
+                  checks: ['proof'],
                 },
               };
               const res = await help.postJson(endpoint, body);
@@ -572,8 +578,12 @@ function cloneObj(obj) {
 }
 
 function annotateWithUniqueId(credentials) {
-  return credentials.map(credential => (credential.id ? {
-    ...credential,
-    id: `${credential.id}#${uuid()}`
-  } : credential));
+  return credentials.map(credential =>
+    credential.id ?
+      {
+        ...credential,
+        id: `${credential.id}#${uuid()}`,
+      } :
+      credential
+  );
 }
