@@ -6,11 +6,11 @@ const trustbloc = require('./trustbloc');
 const factom = require('./factom');
 
 const vendor_map = {
-/*  transmute,
+  transmute,
   digital_bazaar,
   danubetech,
   mavennet,
-  trustbloc,*/
+  trustbloc,
   factom,
 };
 
