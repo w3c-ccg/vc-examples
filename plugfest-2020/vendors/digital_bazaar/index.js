@@ -26,5 +26,17 @@ module.exports = {
         },
       ],
     },
+    {
+      name: 'DID Veres One Issuer',
+      // eslint-disable-next-line max-len
+      endpoint: 'https://issuer.interop.digitalbazaar.com/credentials/did%3Akey%3Az6MkqEkgL8ispR6YVh9rDyVapUVPv4zAvT2MPBMAHjUNDk5d/issueCredential',
+      options: [
+        {
+          issuer: 'did:v1:test:nym:z6MkqaFQ7SZdWMgUkiQLvxZBpmkmYmbgAcAvXftU7jfmMWLa',
+          // eslint-disable-next-line max-len
+          assertionMethod: 'did:v1:test:nym:z6MkqaFQ7SZdWMgUkiQLvxZBpmkmYmbgAcAvXftU7jfmMWLa#z6MkqaFQ7SZdWMgUkiQLvxZBpmkmYmbgAcAvXftU7jfmMWLa',
+        },
+      ],
+    }
   ],
 };
