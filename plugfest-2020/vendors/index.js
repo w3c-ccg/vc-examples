@@ -4,6 +4,7 @@ const danubetech = require('./danubetech');
 const mavennet = require('./mavennet');
 const trustbloc = require('./trustbloc');
 const factom = require('./factom');
+const sicpa = require('./sicpa');
 
 const vendor_map = {
   transmute,
@@ -12,6 +13,7 @@ const vendor_map = {
   mavennet,
   trustbloc,
   factom,
+  sicpa,
 };
 
 let vendors = [];
