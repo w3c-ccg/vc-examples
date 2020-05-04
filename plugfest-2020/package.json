@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint \"**/*.js\"",
+    "lint:fix": "eslint \"**/*.js\" --fix",
     "test": "jest",
     "test:all": "jest",
     "test:digital_bazaar": "INTEROP_FOCUS=digital_bazaar npm run test",
