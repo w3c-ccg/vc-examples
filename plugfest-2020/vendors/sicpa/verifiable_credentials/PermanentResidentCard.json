@@ -20,6 +20,13 @@
   "issuanceDate": "2020-04-22T10:37:22Z",
   "name": "Permanent Resident Card",
   "description": "Government of Example Permanent Resident Card.",
+  "proof": {
+    "created": "2020-05-04T14:28:12.968Z",
+    "proofPurpose": "assertionMethod",
+    "type": "Ed25519Signature2018",
+    "verificationMethod": "did:sov:staging:PiEVD2uU2qKEQ5oxx1BJ6A#key-1",
+    "jws": "eyJhbGciOiAiRWREU0EiLCAiYjY0IjogZmFsc2UsICJjcml0IjogWyJiNjQiXX0..0WmF0baugFJxiqUyZFaHDu73isIMcN1mPSkUUdqGoigQXn4u3Q_bMvK6HtQ8WlkcOmlhbS9958MjXPRjTXdwCw"
+  },
   "type": [
     "VerifiableCredential",
     "PermanentResidentCard"
@@ -28,12 +35,5 @@
     "https://www.w3.org/2018/credentials/v1",
     "https://w3id.org/citizenship/v1"
   ],
-  "issuer": "did:sov:staging:PiEVD2uU2qKEQ5oxx1BJ6A",
-  "proof": {
-    "created": "2020-04-25T19:38:39.161Z",
-    "proofPurpose": "assertionMethod",
-    "type": "Ed25519Signature2018",
-    "verificationMethod": "did:sov:staging:PiEVD2uU2qKEQ5oxx1BJ6A#key-1",
-    "jws": "eyJhbGciOiAiRWREU0EiLCAiYjY0IjogZmFsc2UsICJjcml0IjogWyJiNjQiXX0..tJtVR30lKW0OmgelU57QOUR8VAXRmngpElRuGWAPpG4q9eazNVA_5-nV4TrdRkKGtI1lgzDLX-NvJvCwbiNoCw"
-  }
+  "issuer": "did:sov:staging:PiEVD2uU2qKEQ5oxx1BJ6A"
 }

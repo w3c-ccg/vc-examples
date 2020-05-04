@@ -14,14 +14,25 @@ module.exports = {
   verifiable_presentations: [...verifiable_presentations],
   issuers: [
     {
-      name: 'SICPA issuer (did:sov)',
-      endpoint: 'http://localhost:8077/api/credentials/issueCredential',
-      options: [
+        name: 'DID sov issuer',
+        endpoint: 'http://localhost:8077/api/credentials/issueCredential',
+        options: [
+          {
+             issuer: "did:sov:staging:PiEVD2uU2qKEQ5oxx1BJ6A",
+             assertionMethod: "did:sov:staging:PiEVD2uU2qKEQ5oxx1BJ6A#key-1",
+          },
+        ],
+      },
         {
-           issuer: "did:sov:staging:PiEVD2uU2qKEQ5oxx1BJ6A",
-           assertionMethod: "did:sov:staging:PiEVD2uU2qKEQ5oxx1BJ6A#key-1",
-        },
-      ],
-    }
+        name: 'DID Key Issuer',
+        // eslint-disable-next-line max-len
+        endpoint: 'http://localhost:8077/api/credentials/issueCredential',
+        options: [
+          {
+            issuer: 'did:key:z6MkrqCMy45WhL3UEa1gGTHUtr17AvU4czfP5fH9KNDoYaYN',
+            assertionMethod: 'did:key:z6MkrqCMy45WhL3UEa1gGTHUtr17AvU4czfP5fH9KNDoYaYN#z6MkrqCMy45WhL3UEa1gGTHUtr17AvU4czfP5fH9KNDoYaYN',
+          },
+        ],
+      }
   ],
 };
