@@ -26,7 +26,7 @@ module.exports = {
         {
         name: 'DID Key Issuer',
         // eslint-disable-next-line max-len
-        endpoint: 'http://localhost:8077/api/credentials/issueCredential',
+        endpoint: 'https://svip-interop.ocs-support.com/api/credentials/issueCredential',
         options: [
           {
             issuer: 'did:key:z6MkrqCMy45WhL3UEa1gGTHUtr17AvU4czfP5fH9KNDoYaYN',
