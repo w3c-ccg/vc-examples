@@ -426,6 +426,26 @@ describe('Plugfest 2020', () => {
               expect(res.body.checks).toEqual(['proof']);
             });
           });
+
+          // eslint-disable-next-line-max-len
+          describe('14. The Verifier\'s Verify Credential HTTP API SHOULD verify all other teams credentials', () => {
+            const endpoint = vendor.verify_credential_endpoint;
+            vendors.map(ven => {
+              it(`should verify ${ven.name}\'s credentials`, async () =>{
+                await Promise.all(ven.verifiable_credentials.map(async vc => {
+                  const body = {
+                    verifiableCredential: vc,
+                    options: {
+                      checks: ['proof']
+                    },
+                  };
+                  const res = await help.postJson(endpoint, body);
+                  expect(res.status).toBe(200);
+                  expect(res.body.checks).toEqual(['proof']);
+                }));
+              });
+            });
+          });
         });
 
         describe('Verify Presentation HTTP API', () => {
