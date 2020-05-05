@@ -430,7 +430,7 @@ describe('Plugfest 2020', () => {
           // eslint-disable-next-line-max-len
           describe('14. The Verifier\'s Verify Credential HTTP API SHOULD verify all other teams credentials', () => {
             const endpoint = vendor.verify_credential_endpoint;
-            vendors.map(ven => {
+            vendors.filter(ven => ven.name !== vendor.name).map(ven => {
               it(`should verify ${ven.name}\'s credentials`, async () =>{
                 await Promise.all(ven.verifiable_credentials.map(async vc => {
                   const body = {
