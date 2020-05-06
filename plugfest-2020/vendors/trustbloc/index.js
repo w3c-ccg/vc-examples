@@ -21,9 +21,9 @@ module.exports = {
       options: [
         {
           // eslint-disable-next-line max-len
-          issuer: 'did:trustbloc:testnet.trustbloc.dev:EiCfRcBfwmBnZLZ7ESNxGgwUpfT23Rg159wO5QUa3_sghg',
+          issuer: 'did:trustbloc:testnet.trustbloc.dev:EiBtYHD1_ybxr9icxKxCWhOL7G1UoygLEJ2mXVznkrlBEA',
           // eslint-disable-next-line max-len
-          assertionMethod: 'did:trustbloc:testnet.trustbloc.dev:EiCfRcBfwmBnZLZ7ESNxGgwUpfT23Rg159wO5QUa3_sghg#SnUe0sJ6fuz_i3RKwzLg',
+          assertionMethod: 'did:trustbloc:testnet.trustbloc.dev:EiBtYHD1_ybxr9icxKxCWhOL7G1UoygLEJ2mXVznkrlBEA#IhhisIjDfhneDSa_7f3H',
         },
       ],
     },
