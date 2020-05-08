@@ -1,1 +1,70 @@
-[{"fileName":"https://w3c-ccg.github.io/vc-examples/chapi-http-edu/vc.json","type":"UniversityDegreeCredential"},{"fileName":"https://w3c-ccg.github.io/vc-examples/cmtr/examples/v0.0/cmtr-credential-v0.0.json","type":"CertifiedMillTestReport"},{"fileName":"https://w3c-ccg.github.io/vc-examples/cmtr/examples/v0.0/cmtr-verifiable-credential-v0.0.json","type":"CertifiedMillTestReport"},{"fileName":"https://w3c-ccg.github.io/vc-examples/cmtr/examples/v0.1/cmtr-credential-v0.1.json","type":"CertifiedMillTestReport"},{"fileName":"https://w3c-ccg.github.io/vc-examples/cmtr/examples/v0.1/cmtr-verifiable-credential-v0.1.json","type":"CertifiedMillTestReport"},{"fileName":"https://w3c-ccg.github.io/vc-examples/cmtr/examples/v0.2/cmtr-credential-v0.2.json","type":"CertifiedMillTestReport"},{"fileName":"https://w3c-ccg.github.io/vc-examples/cmtr/examples/v0.2/cmtr-verifiable-credential-v0.2.json","type":"CertifiedMillTestReport"},{"fileName":"https://w3c-ccg.github.io/vc-examples/covid-19/v1/credential.json","type":"ImmunoglobulinDetectionTestCard"},{"fileName":"https://w3c-ccg.github.io/vc-examples/covid-19/v1/verifiable-credential.json","type":"ImmunoglobulinDetectionTestCard"},{"fileName":"https://w3c-ccg.github.io/vc-examples/covid-19/v2/qSARS-CoV-2-Rapid-Test-Credential.json","type":"qSARS-CoV-2-Rapid-Test-Credential"},{"fileName":"https://w3c-ccg.github.io/vc-examples/covid-19/v2/qSARS-CoV-2-Travel-Badge-Credential.json","type":"qSARS-CoV-2-Travel-Badge-Credential"},{"fileName":"https://w3c-ccg.github.io/vc-examples/crude/examples/v1.0/bill-of-lading-verifiable-credential-v1.0.json","type":"BillOfLadingCredential"},{"fileName":"https://w3c-ccg.github.io/vc-examples/crude/examples/v1.0/crude-inspection-verifiable-credential-v1.0.json","type":"CrudeInspectionCredential"},{"fileName":"https://w3c-ccg.github.io/vc-examples/crude/examples/v1.0/crude-product-verifiable-credential-v1.0.json","type":"CrudeProductCredential"},{"fileName":"https://w3c-ccg.github.io/vc-examples/crude/examples/v1.0/qp-inbond-verifiable-credential-v1.0.json","type":"QPInbondCredential"},{"fileName":"https://w3c-ccg.github.io/vc-examples/edu/university-degree-verifiable-credential.json","type":"UniversityDegreeCredential"},{"fileName":"https://w3c-ccg.github.io/vc-examples/prc/danube/prc.json","type":"PermanentResidentCard"}]
+[
+  {
+    "fileName": "https://w3c-ccg.github.io/vc-examples/chapi-http-edu/vc.json",
+    "type": "UniversityDegreeCredential"
+  },
+  {
+    "fileName": "https://w3c-ccg.github.io/vc-examples/cmtr/examples/v0.0/cmtr-credential-v0.0.json",
+    "type": "CertifiedMillTestReport"
+  },
+  {
+    "fileName": "https://w3c-ccg.github.io/vc-examples/cmtr/examples/v0.0/cmtr-verifiable-credential-v0.0.json",
+    "type": "CertifiedMillTestReport"
+  },
+  {
+    "fileName": "https://w3c-ccg.github.io/vc-examples/cmtr/examples/v0.1/cmtr-credential-v0.1.json",
+    "type": "CertifiedMillTestReport"
+  },
+  {
+    "fileName": "https://w3c-ccg.github.io/vc-examples/cmtr/examples/v0.1/cmtr-verifiable-credential-v0.1.json",
+    "type": "CertifiedMillTestReport"
+  },
+  {
+    "fileName": "https://w3c-ccg.github.io/vc-examples/cmtr/examples/v0.2/cmtr-credential-v0.2.json",
+    "type": "CertifiedMillTestReport"
+  },
+  {
+    "fileName": "https://w3c-ccg.github.io/vc-examples/cmtr/examples/v0.2/cmtr-verifiable-credential-v0.2.json",
+    "type": "CertifiedMillTestReport"
+  },
+  {
+    "fileName": "https://w3c-ccg.github.io/vc-examples/covid-19/v1/credential.json",
+    "type": "ImmunoglobulinDetectionTestCard"
+  },
+  {
+    "fileName": "https://w3c-ccg.github.io/vc-examples/covid-19/v1/verifiable-credential.json",
+    "type": "ImmunoglobulinDetectionTestCard"
+  },
+  {
+    "fileName": "https://w3c-ccg.github.io/vc-examples/covid-19/v2/qSARS-CoV-2-Rapid-Test-Credential.json",
+    "type": "qSARS-CoV-2-Rapid-Test-Credential"
+  },
+  {
+    "fileName": "https://w3c-ccg.github.io/vc-examples/covid-19/v2/qSARS-CoV-2-Travel-Badge-Credential.json",
+    "type": "qSARS-CoV-2-Travel-Badge-Credential"
+  },
+  {
+    "fileName": "https://w3c-ccg.github.io/vc-examples/crude/examples/v1.0/bill-of-lading-verifiable-credential-v1.0.json",
+    "type": "BillOfLadingCredential"
+  },
+  {
+    "fileName": "https://w3c-ccg.github.io/vc-examples/crude/examples/v1.0/crude-inspection-verifiable-credential-v1.0.json",
+    "type": "CrudeInspectionCredential"
+  },
+  {
+    "fileName": "https://w3c-ccg.github.io/vc-examples/crude/examples/v1.0/crude-product-verifiable-credential-v1.0.json",
+    "type": "CrudeProductCredential"
+  },
+  {
+    "fileName": "https://w3c-ccg.github.io/vc-examples/crude/examples/v1.0/qp-inbond-verifiable-credential-v1.0.json",
+    "type": "QPInbondCredential"
+  },
+  {
+    "fileName": "https://w3c-ccg.github.io/vc-examples/edu/university-degree-verifiable-credential.json",
+    "type": "UniversityDegreeCredential"
+  },
+  {
+    "fileName": "https://w3c-ccg.github.io/vc-examples/prc/danube/prc.json",
+    "type": "PermanentResidentCard"
+  }
+]
