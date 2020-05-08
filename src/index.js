@@ -15,7 +15,7 @@ glob(parent + '/**/*.json', {}, (err, files) => {
           typeArray.splice(typeArray.indexOf('VerifiableCredential'), 1);
           let fixedName = fileName.substring(parent.length);
           return {
-            "fileName": website + fixedName,
+            "url": website + fixedName,
             "type": typeArray[0]
           };
         } else return null;
