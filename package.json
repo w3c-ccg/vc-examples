@@ -1,0 +1,25 @@
+{
+  "name": "vc-examples",
+  "version": "1.0.0",
+  "description": "Verifiable Credentials Examples",
+  "main": "src/index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/w3c-ccg/vc-examples.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/w3c-ccg/vc-examples/issues"
+  },
+  "homepage": "https://github.com/w3c-ccg/vc-examples#readme",
+  "dependencies": {
+    "glob": "^7.1.6"
+  }
+}
