@@ -9,6 +9,8 @@ jobs:
       working-directory: ./plugfest-2020
 
     strategy:
+      # will not stop all tests if one vendor's tests fail
+      fail-fast: false
       matrix:
         node-version: [12.x]
         vendor:
